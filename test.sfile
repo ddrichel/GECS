@@ -1,0 +1,9 @@
+BFILE GERAD2013_Carriers_up_to_261_chr19
+#BFILE test	     // plink binary file without extension
+SIMULATIONS 49	     // number of permutations
+SINGLEMARKER 0 	     // perform single marker analysis instead of VB
+VB 1 	     	     // variable binning
+VT 0 		     // variable threshold
+NCT 261		     // threshold number of carriers
+#MININDIV 20
+OUTPUTNAME test_2	     // output without extension
