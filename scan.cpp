@@ -515,21 +515,7 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 		    {
 			stat=0;
 		    }
-		    /*
-		    if(odds)
-		    {
-			if(sX == 0 || sY==0 || ncases==sX)
-			{
-			    OR_COLL=-9999;
-			}
-			else
-			{
-			    OR_COLL=(double)sX*((double)ncontrols-(double)sY)/((double)sY*((double)ncases-(double)sX));
-			}
-			if(pvalue<=pthresh) rareVB<<"\t"<<OR_COLL<<endl;
-			else if (pvalue<=pthresh) rareVB<<endl;
-		    }
-		    */
+
 		    if(stat>statsMC[n-1]) statsMC[n-1]=stat;
 		}
 	    }
