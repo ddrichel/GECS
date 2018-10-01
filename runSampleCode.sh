@@ -42,7 +42,7 @@
 # Use for that the command "bash runSampleCode.sh" 
 
 
-#./gecs ./Docs/DATA/example_1.param
+./gecs ./Docs/DATA/example_1.param
 #./gecs ./Docs/DATA/example_2.param
 #./gecs ./Docs/DATA/example_3.param
 #./gecs ./Docs/DATA/example_4.param
