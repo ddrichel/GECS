@@ -470,6 +470,7 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 		}
 		
 		pvalue=alglib::chisquarecdistribution(1.0, stat);
+		
 		if(n1!=n2) 
 		{
 		    nbinsdistinct+=1;
@@ -479,7 +480,22 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 		    rareVB<<map[window[l].index[n1]].chr<<"\t"<<map[window[l].index[n1]].pos<<"\t"<<map[window[l].index[n2]].pos<<"\t"<<n1+1<<"\t"<<n2+1<<"\t"<<Ind1;
 		    if(verbose) rareVB<<"\t"<<stat;
 		    rareVB<<"\t"<<pvalue;
+		
+		if(odds)
+                {
+                    if(sX == 0 || sY==0 || ncases==sX)
+                    {
+                        OR_COLL=-9999;
+                    }
+                    else
+                    {
+                        OR_COLL=(double)sX*((double)ncontrols-(double)sY)/((double)sY*((double)ncases-(double)sX));
+                    }
+                    rareVB<<"\t"<<OR_COLL<<endl;
+                }
+		else rareVB<<endl;
 		}
+
 		for(int n=1; n<nsim+1; n++) 
 		{
 		    sY=0;
@@ -488,14 +504,18 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 			sY+=__builtin_popcountll(dummy[p] & BinSNPsCCFlagsMC[n][p][1]);
 		    }
 		    sX=Ind1-sY;
+		    int sXY=sX+sY;
+		    int diff=sX*ncontrols-sY*ncases;
 		    if((ncases+ncontrols-sX-sY)!=0) 
 		    {
 			stat=nInd*(double)diff*(double)diff/(((ncnc)*(double)(sXY)*(double)(nInd-sXY)));
+			//stat=((double)(ncases + ncontrols)*(double)(sX*ncontrols - sY*ncases)*(double)(sX*ncontrols-sY*ncases))/(((double)(ncases*ncontrols)*(double)(sX+sY)*(double)(ncases+ncontrols-sX-sY)));
 		    }
 		    else
 		    {
 			stat=0;
 		    }
+		    /*
 		    if(odds)
 		    {
 			if(sX == 0 || sY==0 || ncases==sX)
@@ -506,12 +526,12 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 			{
 			    OR_COLL=(double)sX*((double)ncontrols-(double)sY)/((double)sY*((double)ncases-(double)sX));
 			}
+			if(pvalue<=pthresh) rareVB<<"\t"<<OR_COLL<<endl;
+			else if (pvalue<=pthresh) rareVB<<endl;
 		    }
+		    */
 		    if(stat>statsMC[n-1]) statsMC[n-1]=stat;
-		    
 		}
-		if(odds) rareVB<<"\t"<<OR_COLL<<endl;
-		else rareVB<<endl;
 	    }
 	}
     }
@@ -523,6 +543,7 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 
     for(int s=0; s<nsim; s++)
     {
+	cout<<statsMC[s]<<endl;
 	pvaluesMC[s]=alglib::chisquarecdistribution(1.0, statsMC[s]);
     }
 

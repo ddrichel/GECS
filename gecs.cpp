@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
     }
 
     cout<<"-- GECS: genomic exhaustive collapsing scan --\n"<<endl;
-  
+    cout<<"Scan started:"<<time(0)<<endl;
     // read paramters
     ifstream paramfile;
     paramfile.open(argv[1], ios::in);  
@@ -239,6 +239,16 @@ int main(int argc, char *argv[]) {
 
     logfile.open(logname.c_str(), ios::out);
     logfile.clear();
+    
+    stringstream strm;
+    
+    strm<<"-- GECS: genomic exhaustive collapsing scan --\n"<<"\n";
+    
+    time_t now1 = time(0);
+    tm* locstarttime = localtime(&now1);
+    strm<<"Scan start time:"<<asctime(locstarttime)<<endl;
+    logg(strm.str());
+    strm.str(string());
 
     cout << "\nNumber of lines in famfile: " << nlinestfam<<endl;
     nwordsSNPs=nlinestfam/64;
@@ -266,7 +276,7 @@ read fam file
   
 */
 
-    stringstream strm;
+    //stringstream strm;
 
     ffile.open(famfile.c_str(), ios::in);  
     if(!ffile) die("fam file can not be opened!");
@@ -632,7 +642,13 @@ permute affection status
     }
     delete[] BinSNPsCCFlagsMC;
     delete[] map;
-  
+    
+    time_t now2 = time(0);
+    tm* locendtime = localtime(&now2);
+    strm<<"\n\n"<<"Scan end time:"<<asctime(locendtime)<<endl;
+    logg(strm.str());
+    strm.str(string());
+    
     logfile.close();
 
 }
