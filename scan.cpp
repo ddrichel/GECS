@@ -196,7 +196,6 @@ void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nword
  
     int nindiv=ncases+ncontrols;
     int differentbin=0;
-    long unsigned int nbinsdistinct=0;
     long unsigned int nbinsnaive=0;
 
     // initiate and print out the table's header of the results
@@ -255,7 +254,6 @@ void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nword
 		for(int n2=n1; n2<window[l].n; n2++) 
 		{
 		    differentbin=0; // if new variants are contributed by last SNP in bin, set to 1
-		    int skiprow=1; // if new variants are contributed by first SNP in bin, set to 0
 		    if(n2!=n1) 
 		    {
 			for (uint32_t p=0; p<nwords; p++) 

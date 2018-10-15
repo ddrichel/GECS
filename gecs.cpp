@@ -200,7 +200,6 @@ int main(int argc, char *argv[]) {
 
     nlinestped = 0;
     string line;
-    int number_of_lines = 0;
     string famline;
     ifstream ffile;
     ffile.open(famfile.c_str(), ios::in);  
@@ -215,11 +214,11 @@ int main(int argc, char *argv[]) {
 	MAFT=0.5; // In case was NCT only specified!
 
     }
-    else if (NCT==0 & MAFT>0) // If MAFT only was specified, assign the correspeondent value to NCT
+    else if (NCT==0 && MAFT>0) // If MAFT only was specified, assign the corresponding value to NCT
     {
         NCT=floor(nlinestfam*(2*MAFT-MAFT*MAFT));
     }
-    else if (NCT>0 & MAFT==0) MAFT= round(1000*(1-sqrt(1-(NCT*1.0/nlinestfam))))/1000.0;
+    else if (NCT>0 && MAFT==0) MAFT= round(1000*(1-sqrt(1-(NCT*1.0/nlinestfam))))/1000.0;
 
 
     if(singlemarker) // initiate the log file (define the file name)
@@ -402,7 +401,6 @@ read bed file
 	if(!vi[i])die("Memory allocation error in vi[i]!");
     }
   
-    uint64_t x=1;
     char *buffer=new char[nwordsalleles];
     int rarevariants=0;
     int *ncarriers=new int[nlinestped]();
@@ -417,20 +415,20 @@ read bed file
     	    for(uint8_t k=0; k<4; k++)
 	    {
 		counter++;
-		if((counter+64*countword)>nlinestfam) break;
+		if((counter+64*countword)>(unsigned)nlinestfam) break;
     		if(((uint8_t)buffer[j]&mask8bit[k])==0)
 		{
 		    vi[i][countword] |=mask64bit[counter-1];
 		}	 
     	    }
-    	    if((counter+64*countword)>nlinestfam) break;
+    	    if((counter+64*countword)>(unsigned)nlinestfam) break;
     	    if(counter==64)
 	    {
 		countword++;
 		counter=0;
 	    }
 	}
-	for(int l=0; l<nwordsSNPs; l++){
+	for(unsigned int l=0; l<nwordsSNPs; l++){
     	    ncarriers[i]+=__builtin_popcountll(vi[i][l]);
 	}
 	if(ncarriers[i]<=NCT && ncarriers[i]>0){
@@ -546,7 +544,7 @@ read bed file
 	for(int j=0; j<window[i].n; j++)
 	{
     	    window[i].index[j]=rvcount;
-    	    for(int k=0; k<nwordsSNPs; k++) 
+    	    for(unsigned int k=0; k<nwordsSNPs; k++) 
 	    {
 		BinCarriers[i][j][k]=vi[rv_to_allv[rvcount]][k];
 		window[i].Ind[j]+=__builtin_popcountll(BinCarriers[i][j][k]);
@@ -575,7 +573,6 @@ read bed file
 permute affection status
 
 */
-    int **levelcounter=NULL;
     for(int l=0; l<nwindows; l++) window[l].n_level=1;
 
 
@@ -583,7 +580,7 @@ permute affection status
     {
 	srand(int(time(NULL)));
 	uint64_t** BinCarriersPermuted=new uint64_t*[nwordsSNPs];
-	for(int j=0; j<nwordsSNPs; j++)
+	for(unsigned int j=0; j<nwordsSNPs; j++)
 	{
 	    BinCarriersPermuted[j]=new uint64_t[3]();
     	    BinCarriersPermuted[j][1]=0xFFFFFFFFFFFFFFFFull;
@@ -600,7 +597,7 @@ permute affection status
     	    newcontrols+=__builtin_popcountll(BinCarriersPermuted[p][1]);
     	    newcases+=__builtin_popcountll(BinCarriersPermuted[p][2]);
 	}
-	for(int j=0; j<nwordsSNPs; j++)
+	for(unsigned int j=0; j<nwordsSNPs; j++)
 	{      
 	delete[] BinCarriersPermuted[j];
 	}
