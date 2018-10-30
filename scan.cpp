@@ -76,72 +76,119 @@ void calc_singlemarker(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t n
     double *pvaluesMC=new double[nsim]();
     fill_n(pvaluesMC,nsim,1);
     
-    // Loop on all variants included in the analysis
+    double *statsMC=new double[nsim]();
+    fill_n(statsMC,nsim,0);
+    
+    // Loop on all levels (here there is one level)
     for(int l=0; l<nwindows; l++) 
     {	
+	// Loop on all window sizes (here one window size, namely 1 is available)
         for(int m=0; m<window[l].n_level; m++) 
 	{
 	    uint64_t** dummy = new uint64_t*[1]();
             if(!dummy) die("Memory allocation error in dummy!");
+
             dummy[0]=new uint64_t[nwords]();
             if(!dummy) die("Memory allocation error in dummy!");
+	
+	    
+	    int nInd=ncases+ncontrols;	// # all samples 
+	    double ncnc=(double)ncases*(double)ncontrols;	// # all possible values of the tuple space (case,control)
+	    
+	    // Loop on all variants
             for(int n1=0; n1<window[l].n; n1++) 
 	    {
                 for (uint32_t p=0; p<nwords; p++) 
 		{
                     dummy[0][p]=BinCarriers[l][n1][p]; // all variants
                 }
-		// Loop for all simulations 
-                for(int n=0; n<nsim+1; n++)
+                
+		int sY=0;
+                int sX=0;
+                double stat;
+		double OR_COLL;
+                double pvalue;
+		//
+		for (uint32_t p=0; p<nwords; p++)
+		{
+		    sY += __builtin_popcountll(dummy[0][p] & BinSNPsCCFlagsMC[0][p][1]);
+		    sX += __builtin_popcountll(dummy[0][p] & BinSNPsCCFlagsMC[0][p][2]);
+                }
+                
+		int sXY=sX+sY;
+		int diff=sX*ncontrols-sY*ncases;
+
+                if((nInd-sX-sY)!=0) 
+		{
+            	    stat=nInd*(double)diff*(double)diff/(((double)(ncnc)*(double)(sXY)*(double)(nInd-sXY)));
+                }
+		    else
+		{
+            	    stat=0;
+                }
+                
+                pvalue=alglib::chisquarecdistribution(1.0, stat);  // P-value calculator
+		
+		//  Calculate for once the odds ratios (if odds==1)
+                if (odds)
+		{
+		    if(sX == 0 || sY==0 || ncases==sX) OR_COLL=-9999;
+		    else OR_COLL=(double)sX*((double)ncontrols-(double)sY)/((double)sY*((double)ncases-(double)sX));
+		}
+			                                         
+		if(pvalue<=pthresh) 
+		{
+			singlemarkerout<<map[window[l].index[n1]].chr<<"\t"<<map[window[l].index[n1]].pos<<"\t"<<n1+1<<"\t"<<window[l].Ind[n1]<<"\t"<<pvalue;
+			if (odds) singlemarkerout<<"\t"<<OR_COLL;
+			singlemarkerout<<endl;
+		}
+                
+                for(int n=1; n<nsim+1; n++)
 		{
 		    int sY=0;
                     int sX=0;
                     double stat;
-		    double OR_COLL;
-                    double pvalue;
-                    for (uint32_t p=0; p<nwords; p++)
+		    //
+		    for (uint32_t p=0; p<nwords; p++)
 		    {
 			sY += __builtin_popcountll(dummy[0][p] & BinSNPsCCFlagsMC[n][p][1]);
 			sX += __builtin_popcountll(dummy[0][p] & BinSNPsCCFlagsMC[n][p][2]);
+			
                     }
-                    if((ncases+ncontrols-sX-sY)!=0) 
+                    
+		    int sXY=sX+sY;
+		    int diff=sX*ncontrols-sY*ncases;
+
+                    if((nInd-sX-sY)!=0) 
 		    {
-                	stat=((double)ncases + (double)ncontrols)*((double)sX*(double)ncontrols - (double)sY*(double)ncases)*((double)sX*(double)ncontrols-(double)sY*(double)ncases)/((double)ncases*(double)ncontrols*((double)sX+(double)sY)*((double)ncases+(double)ncontrols-(double)sX-(double)sY));
+                	stat=nInd*(double)diff*(double)diff/(((double)(ncnc)*(double)(sXY)*(double)(nInd-sXY)));
                     }
 		    else
 		    {
                 	stat=0;
                     }
-		    //  Calculate for once the odds ratios (if odds==1)
-                    if (odds && n==0)
-		    {
-			if(sX == 0 || sY==0 || ncases==sX) OR_COLL=-9999;
-			else OR_COLL=(double)sX*((double)ncontrols-(double)sY)/((double)sY*((double)ncases-(double)sX));
-		    }
-		    pvalue=alglib::chisquarecdistribution(1.0, stat);  // P-value calculator
+
+		    if(stat>statsMC[n-1]) statsMC[n-1]=stat;
 		    
-		    if(n==0) // Print out the results for this variant
-		    {
-			singlemarkerout<<map[window[l].index[n1]].chr<<"\t"<<map[window[l].index[n1]].pos<<"\t"<<n1+1<<"\t"<<window[l].Ind[n1]<<"\t"<<pvalue;
-			if (odds) singlemarkerout<<"\t"<<OR_COLL;
-			singlemarkerout<<endl;
-            	    }
-		    else // choose the smallest P-value in all permutations 
-		    {
-                	if(pvalue<pvaluesMC[n-1]) pvaluesMC[n-1]=pvalue;
-            	    }
 		}
     	    }
-        for(int m=0; m<1; m++) 
-	{
-            delete[] dummy[m];
-        }
-        delete[] dummy;
+    	
+        delete[] dummy[0];
+	delete[] dummy;
+	
 	}
     }
+    
     singlemarkerout.close();
-
-
+    
+    
+    for(int s=0; s<nsim; s++)
+    {
+           pvaluesMC[s]=alglib::chisquarecdistribution(1.0, statsMC[s]);
+    }
+    
+    //
+                                                                       
     if(nsim>0) // Print out the P-values from the permutations 
     {
 	fstream pvalsMC;
@@ -188,7 +235,7 @@ void calc_singlemarker(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t n
 
 // End: Main SMA function
 
-// Begin: Main GECS variable binning for all possible bins (without reductions)
+// Begin: Main GECS with variable binning for all possible bins (without reductions)
 // NOTICE: This function will be usefull for plotting aims in small genomic regions
  
 void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols,  struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, bool odds)
@@ -507,7 +554,6 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 		    if((ncases+ncontrols-sX-sY)!=0) 
 		    {
 			stat=nInd*(double)diff*(double)diff/(((ncnc)*(double)(sXY)*(double)(nInd-sXY)));
-			//stat=((double)(ncases + ncontrols)*(double)(sX*ncontrols - sY*ncases)*(double)(sX*ncontrols-sY*ncases))/(((double)(ncases*ncontrols)*(double)(sX+sY)*(double)(ncases+ncontrols-sX-sY)));
 		    }
 		    else
 		    {
@@ -527,7 +573,7 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 
     for(int s=0; s<nsim; s++)
     {
-	cout<<statsMC[s]<<endl;
+	//cout<<statsMC[s]<<endl;
 	pvaluesMC[s]=alglib::chisquarecdistribution(1.0, statsMC[s]);
     }
 

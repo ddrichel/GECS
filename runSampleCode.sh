@@ -26,14 +26,13 @@
 # Input parameters and Output file name has to specified in the paremeter file (*.sfile):
 #
 # In addition to the input and output file names, basic parameters have to be specified:
-# SINGLEMARKER (perform single marker analysis), VB (perform GECS), VT (perform GECS with variable MAF threshold).
-# In case of VB == 1, the parameter MAFT or NCT have to be specified. If both parameters were specified, then MAFT will be ignored.
  
-# For SINGLEMARKER = 1 & VB = 0 (The case of conducting the standard single-marker test ONLY):
-# The file *Singlemarker.txt will be generated, which includes the results of association tests.
+# For SINGLEMARKER = 1 (The case of conducting the standard single-marker test ONLY):
+# The file *singlemarker.txt will be generated, which includes the results of association tests.
 
-# For SINGLEMARKER = 0 & VB = 1 (The case of conducting GECS with variable binning ONLY):
-# The file *VB.txt will be generated, which includes the results of the exhaustive scan for association.
+# For SINGLEMARKER = 0 (The case of conducting GECS with variable binning ONLY):
+# The parameter MAFT or NCT have to be specified. If both parameters were specified, then MAFT will be ignored.
+# The file *_gecs_nct_*.txt will be generated, which includes the results of the exhaustive scan for association.
 
 # In both cases, two additional files will be generated, namely *.pvals and *.srt_pvals, and include the the results of the correction for multiple testing.
 #
@@ -46,3 +45,4 @@
 #./gecs ./Docs/DATA/example_2.param
 #./gecs ./Docs/DATA/example_3.param
 #./gecs ./Docs/DATA/example_4.param
+#./gecs ./Docs/DATA/example_5.param

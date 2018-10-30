@@ -1,5 +1,5 @@
-BFILE /home/geo/Documents/VB/GECS/GECS/Docs/DATA/example	// plink binary file without extension
+BFILE ./Docs/DATA/example	// plink binary file without extension
 SINGLEMARKER 1 	     // perform single marker analysis instead of VB
 PERMUTATIONS 999       // number of permutations
 OR 1
-OUTPUTNAME /home/geo/Documents/VB/GECS/GECS/Docs/DATA/example	     // output without extension
+OUTPUTNAME ./Docs/DATA/example	     // output without extension

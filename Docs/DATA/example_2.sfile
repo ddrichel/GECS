@@ -1,6 +1,0 @@
-BFILE /home/geo/Documents/VB/GECS/GECS/Docs/DATA/example           // plink binary file without extension
-SIMULATIONS 99      // number of permutations
-SINGLEMARKER 0       // perform single marker analysis instead of VB
-VB 1                 // variable binning
-NCT 19              // threshold number of carriers
-OUTPUTNAME /home/geo/Documents/VB/GECS/GECS/Docs/DATA/example_test      // output without extension
