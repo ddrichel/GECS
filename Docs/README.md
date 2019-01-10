@@ -26,7 +26,7 @@ cd GECS
 make
 
 ### Description 
-We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds. GECS is an ultra fast program that perform an exhaustive scan for association in case-control genetic data.
+We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds. GECS is an ultra fast program that perform an exhaustive scan for association in case-control genetic data, implemented in c++.
 
 ##### Prerequisites
 
@@ -44,7 +44,7 @@ Keywords in the parameter file [*.param](https://github.com/ddrichel/GECS/tree/m
 
 **SINGLEMARKER**	_\<bool\>_		  (whether single-marker analysis should be performed instead of VB (default=0))   
 
-**PERMUTATIONS**	_\<int\>_		   (number of permutations) 
+**PERMUTATIONS**	_\<int\>_		   (number of permutations for correction of multiple testing) 
 
 **NCT**		_\<int\>_		           ("rareness" threshold: max. number of carriers per variant)
 
@@ -62,7 +62,7 @@ Keywords in the parameter file [*.param](https://github.com/ddrichel/GECS/tree/m
 
 ### Components
 
-GECS is provided by two major features to conduct the analysis for association, namely for signle markers and for all subsequences of contiguous markers. Permutations will be used to make correction for multiple testing. That means if PERMUTATIONS==0, then there is no correction for multiple testing will be done. Moreover, yoe have the possibility to get the corrected p values by wilson score interval for conficence interval of 95%. You have the option to calcutae the odds ratios for all bins by specifying OR==1. (OR=0 is by default)
+GECS provides two major features for conducting association analysis for rare variants, namely for signle markers and for all possible bins (subsequences of contiguous markers) in the genetic data set. In the single marker analysis, all variants will be considered in the analysis, regardless of their frequencies. however, in the variable binning approach we need to specify a threshold of minor allele frequency. Permutations with respect to the case-control labels is applied to make correction for multiple testing. That means if PERMUTATIONS==0, then there is no correction for multiple testing will be done. Moreover, yoe have the possibility to get the corrected p values by wilson score interval for conficence interval of 95%. You have the option to calcutae the odds ratios for all bins by specifying OR==1. (OR=0 is by default)
 
 #### Sigle_Marker_Analysis
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
@@ -71,13 +71,17 @@ Input and output string parameter are to cpecify only the name of input and outp
 ###### Resulted files:
 1. A text file \[*_singlemarker.txt\], which includes the results of association tests for all included markers.
 2. Two files \[*_singlemarker.pvals\] and \[*_singlemarker.srt.pvals\] for the correction of multiple testing based on the null model.
+-NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[*_gecs_nct_\<nct\>.log\] file.
+
 #### Variable_Binning
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
 -NOTICE- that sypecifying NCT will overwrite the parameter MAFT, otherwise, specifying only MAFT will be enough.
 ALLBINS paremeter is set to 0 for the default case, where only distinct bins will be considered. This feature is only usefull in case of scanning small regions for plotting purposes.
+Only 
 ###### Resulted files:
 1. A text file \[*_gecs_\<nct\>.txt\], which includes the results of association tests for all genomic subsequences.
 2. Two files \[*_gecs_\<nct\>.pvals\] and \[*_gecs_\<nct\>.srt.pvals\] for the correction of multiple testing based on the null model.
+
 -NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[*_gecs_nct_\<nct\>.log\] file.
 
 ### Getting_started
