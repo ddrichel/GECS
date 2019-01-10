@@ -1,6 +1,6 @@
 
-# Genomic Exhaustive Collapsing Scans (GECS)
- ###### _Exhaustive scan for association in genmoic data_
+# Genomic Exhaustive Collapsing Scan (GECS)
+ ###### _Exhaustive genomic scan for association in genetic data_
 
 ### Table of contents
 * [Installation](#Instalation)
@@ -9,10 +9,10 @@
   * [Single marker analysis](#Single_marker_analysis)
   * [Variable binning](#Variable_binning)
 * [Getting started](#Getting_started)
-  * [Example 1](#Example_1)
-  * [Example 2](#Example_2)
-  * [Example 3](#Example_3)
-  * [Example 4](#Example_4)
+  * [Example 1](Example 1)
+  * [Example 2](Example 2)
+  * [Example 3](Example 3)
+  * [Example 4](Example 4)
 * [Attributions](#Attributions)
   * [Authors](#Authors)
   * [Aknowledgment](#Acknowledgment)
