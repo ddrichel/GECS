@@ -26,30 +26,13 @@ execiute the make command in the cloned directory
 ### Description: 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
 
-
-* Table of contents
-
-Getting strated
-Prerequisites
-Instalation
-Usage
-Deployment
-Versioning
-Authors
-License
-Acknowledgments
- 
-* Getting strated
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-* Prerequisites
+##### Prerequisites
 
 GECS is distributed under GPL3 license. Starting from GECS 1.1.1, it supports c++ (?) on linux systems.
 This program uses the alglib c++ library.
 
 
-* Usage
+##### Usage
 
 The usage of gecs is very simple. Only execute the follwoing command.
 
@@ -87,7 +70,10 @@ Depends on the aim of analysis. if SINGLEMARKER==1, then the text file *Singlema
 If SINGLEMARKER==0, then the text file *VB.txt will be generated, which includes the results of the exhaustive scan for association.
 Additionally, two files will be always generated, namely *.pvals and *srt.pvals for the correction of multiple testing.
 -NOTICE- the final corrected alpha will be reported with other informations about the analysis in the *.log file.
+
 ### Getting started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 #### Example 1
 #### Example 2
