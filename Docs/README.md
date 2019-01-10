@@ -9,9 +9,9 @@
 
 * [Components](#Components)
 
- ..* [Single marker analysis](#SMA)
+  * [Single marker analysis](#SMA)
 
- ..* [Variable binning](#VB)
+  * [Variable binning](#VB)
 
 
 ### Description: 
