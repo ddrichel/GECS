@@ -4,9 +4,7 @@
 
 ### Table of contents
 * [Installation](#Instalation)
-
 * [Description](#Description)
-
 * [Components](#Components)
 
   * [Single marker analysis](#Single_marker_analysis)
