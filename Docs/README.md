@@ -9,15 +9,15 @@
 
 * [Components](#Components)
 
-  * [Single marker analysis](# Single marker analysis)
+  * [Single marker analysis](# Single_marker_analysis)
 
-  * [Variable binning](#Variable binning)
+  * [Variable binning](#Variable_binning)
 
-* [Getting started](# Getting started)
-  * [Example_1](#Example 1)
-  * [Example_2](#Example 2)
-  * [Example_3](#Example 3)
-  * [Example_4](#Example 4)
+* [Getting started](#Getting_started)
+  * [Example 1](#Example_1)
+  * [Example 2](#Example_2)
+  * [Example 3](#Example_3)
+  * [Example 4](#Example_4)
 
 * [Attributions](#Attributions)
 
