@@ -6,28 +6,26 @@
 * [Installation](#Instalation)
 * [Description](#Description)
 * [Components](#Components)
-
   * [Single marker analysis](#Single_marker_analysis)
-
   * [Variable binning](#Variable_binning)
-
 * [Getting started](#Getting_started)
   * [Example 1](#Example_1)
   * [Example 2](#Example_2)
   * [Example 3](#Example_3)
   * [Example 4](#Example_4)
-
 * [Attributions](#Attributions)
   * [Authors](#Authors)
   * [Aknowledgment](#Acknowledgment)
   * [Citation](#Citation)
 
+### Instalation
+
+clone from github ddrichel repository
+execiute the make command in the cloned directory
+
 ### Description: 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
 
-* Citation
-Pleadse site George Kanoungi, Michael Nothnagel and Dmitriy Drichel (2018)
-- Exhaustive scan in Genome-Wide Association studies -
 
 * Table of contents
 
@@ -50,10 +48,6 @@ These instructions will get you a copy of the project up and running on your loc
 GECS is distributed under GPL3 license. Starting from GECS 1.1.1, it supports c++ (?) on linux systems.
 This program uses the alglib c++ library.
 
-### Instalation
-
-clone from github ddrichel repository
-execiute the make command in the cloned directory
 
 * Usage
 
@@ -96,22 +90,24 @@ Additionally, two files will be always generated, namely *.pvals and *srt.pvals 
 ### Getting started
 
 #### Example 1
-
 #### Example 2
+#### Example 3
+#### Example 4
 
 ### Attributions
 
-* Versioning
-
-We use SemVer for versioning. For the versions available, see the tags on this repository.
-
-* Authors
+#### Authors
 
 Dmitriy Drichel -initial work-
 
-* License
+#### License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
 
-*Acknowledments
+#### Acknowledgment
+This project is financed by DFG.
+
+#### Citation
+Please site: George Kanoungi, Michael Nothnagel and Dmitriy Drichel. An exhaustive genomic scan (2019)
+
 
