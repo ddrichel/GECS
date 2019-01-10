@@ -3,15 +3,15 @@
  ###### _Exhaustive scan for association in genmoic data_
 
 ### Table of contents
-*[Installation](#Instalation)
+* [Installation](#Instalation)
 
-*[Description](#Description)
+* [Description](#Description)
 
-*[Components](#Components)
+* [Components](#Components)
 
- **[Single marker analysis](#SMA)
+ ..* [Single marker analysis](#SMA)
 
- **[Variable binning](#VB)
+ ..* [Variable binning](#VB)
 
 
 ### Description: 
