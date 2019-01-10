@@ -1,7 +1,8 @@
-* Project name: 
-Genomic Exhaustive Collapsing Scan Statistics (GECS)
 
-* Description: 
+# Genomic Exhaustive Collapsing Scans (GECS)
+#### -- Exhaustive scan for association in genmoic data
+
+### Description: 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
 
 * Citation
