@@ -37,7 +37,7 @@ This program uses the alglib c++ library.
 The usage of gecs is very simple. Only execute the follwoing command.
 gecs <~/path/to/file.param>
 
-Keywords in the parameter file [*/file.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example1.param) :
+Keywords in the parameter file [*/file.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
 
 BFILE		string		      (prefix of the plink binary file)
 SINGLEMARKER	bool		  (whether single-marker analysis should be performed instead of VB (default=0))  
