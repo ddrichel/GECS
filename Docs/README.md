@@ -62,27 +62,23 @@ Keywords in the parameter file [*.param](https://github.com/ddrichel/GECS/tree/m
 
 ### Components
 
-The default feature of GECS is to conduct the exhaustive collapsing scan for association, for signle markers and subsequences of contiguous markers 
+GECS is provided by two major features to conduct the analysis for association, namely for signle markers and for all subsequences of contiguous markers. Permutations will be used to make correction for multiple testing. That means if PERMUTATIONS==0, then there is no correction for multiple testing will be done. Moreover, yoe have the possibility to get the corrected p values by wilson score interval for conficence interval of 95%. You have the option to calcutae the odds ratios for all bins by specifying OR==1. (OR=0 is by default)
+
+#### Sigle_Marker_Analysis
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
 -NOTICE- that in case of SINGLEMARKER==1, MAFT will be set to the maximum and the NCT and ALLBINS parameters will be ignored.
 Input and output string parameter are to cpecify only the name of input and output file without any extensions.
-
-#### Sigle_Marker_Analysis (SINGLEMARKER==1).
-In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
-
+###### Resulted files:
+1. A text file \[*_singlemarker.txt\], which includes the results of association tests for all included markers.
+2. Two files \[*_singlemarker.pvals\] and \[*_singlemarker.srt.pvals\] for the correction of multiple testing based on the null model.
 #### Variable_Binning
+In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
 -NOTICE- that sypecifying NCT will overwrite the parameter MAFT, otherwise, specifying only MAFT will be enough.
 ALLBINS paremeter is set to 0 for the default case, where only distinct bins will be considered. This feature is only usefull in case of scanning small regions for plotting purposes.
-
-For all cases, permutations will be used to make correction for multiple testing. That means if PERMUTATIONS==0, then there is no correction for multiple testing will be done.
-
-You have the option to calcutae the odds ratios for all bins by specifying OR==1. (OR=0 is by default)
-Resulted files
-
-Depends on the aim of analysis. if SINGLEMARKER==1, then the text file *Singlemarker.txt will be generated, which includes the results of association tests.
-If SINGLEMARKER==0, then the text file *VB.txt will be generated, which includes the results of the exhaustive scan for association.
-Additionally, two files will be always generated, namely *.pvals and *srt.pvals for the correction of multiple testing.
--NOTICE- the final corrected alpha will be reported with other informations about the analysis in the *.log file.
+###### Resulted files:
+1. A text file \[*_gecs_\<nct\>.txt\], which includes the results of association tests for all genomic subsequences.
+2. Two files \[*_gecs_\<nct\>.pvals\] and \[*_gecs_\<nct\>.srt.pvals\] for the correction of multiple testing based on the null model.
+-NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[*_gecs_nct_\<nct\>.log\] file.
 
 ### Getting_started
 
