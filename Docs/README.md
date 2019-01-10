@@ -9,7 +9,7 @@
 
 * [Components](#Components)
 
-  * [Single marker analysis](# Single_marker_analysis)
+  * [Single marker analysis](#Single_marker_analysis)
 
   * [Variable binning](#Variable_binning)
 
@@ -20,6 +20,9 @@
   * [Example 4](#Example_4)
 
 * [Attributions](#Attributions)
+  * [Authors](#Authors)
+  * [Aknowledgment](#Acknowledgment)
+  * [Citation](#Citation)
 
 ### Description: 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
