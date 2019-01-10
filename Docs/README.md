@@ -13,6 +13,13 @@
 
   * [Variable binning](#VB)
 
+* [Getting started](#Getting started)
+  * [Example](#Example 1)
+  * [Example](#Example 2)
+  * [Example](#Example 3)
+  * [Example](#Example 4)
+
+* [Attributions](#Attributions)
 
 ### Description: 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
@@ -65,7 +72,7 @@ ALLBINS		bool		  # whether locally not-distinct bins should be written to output
 OR		bool		  # Whether odd ratios will be calculated or not.
 OUTPUT		string 		  # prefix of output files
 
-Interpretation
+### Components
 
 The default feature of GECS is to conduct the exhaustive collapsing scan for association (SINGLEMARKER==0).
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
