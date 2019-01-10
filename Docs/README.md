@@ -23,7 +23,7 @@
 clone GECS github repository
 execiute the make command in the cloned directory
 
-### Description: 
+### Description 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
 
 ##### Prerequisites
@@ -57,7 +57,10 @@ If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all va
 -NOTICE- that in case of SINGLEMARKER==1, MAFT will be set to the maximum and the NCT and ALLBINS parameters will be ignored.
 Input and output string parameter are to cpecify only the name of input and output file without any extensions.
 
+#### Sigle marker analysis
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
+
+#### Variable binning
 -NOTICE- that sypecifying NCT will overwrite the parameter MAFT, otherwise, specifying only MAFT will be enough.
 ALLBINS paremeter is set to 0 for the default case, where only distinct bins will be considered. This feature is only usefull in case of scanning small regions for plotting purposes.
 
