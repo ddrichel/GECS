@@ -40,15 +40,15 @@ gecs <~/path/to/file.param>
 Keywords in the parameter file [*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
 
 **BFILE** _\<string\>_         (prefix of the plink binary file)"
-**SINGLEMARKER**	_bool_		  (whether single-marker analysis should be performed instead of VB (default=0))  
-**PERMUTATIONS**	_int_		   (number of permutations)
-**NCT**		_int_		           ("rareness" threshold: max. number of carriers per variant)
-**MAFT** _double_          (Minor allele fequency threshold for rare variants)
-**PTHRESHOLD**	_double_		  (max. nominal p-value for bins to be written to output files)
-**ALLBINS**		_bool_		      (whether locally not-distinct bins should be written to output (useful for plotting, default=0))
-**OR**		_bool_		           (Whether odd ratios will be calculated)
-**CORRECTED_P** vbool_     (Whether calculated p values will be corrected by wilson score interval of CI 95%) 
-**OUTPUT**		_string_ 		    (Prefix of output files)
+**SINGLEMARKER**	_\<bool\>_		  (whether single-marker analysis should be performed instead of VB (default=0))  
+**PERMUTATIONS**	_\<int\>_		   (number of permutations)
+**NCT**		_\<int\>_		           ("rareness" threshold: max. number of carriers per variant)
+**MAFT** _\<double\>_          (Minor allele fequency threshold for rare variants)
+**PTHRESHOLD**	_\<double\>_		  (max. nominal p-value for bins to be written to output files)
+**ALLBINS**		_\<bool\>_		      (whether locally not-distinct bins should be written to output (useful for plotting, default=0))
+**OR**		_\<bool\>_		           (Whether odd ratios will be calculated)
+**CORRECTED_P** _\<bool\>_     (Whether calculated p values will be corrected by wilson score interval of CI 95%) 
+**OUTPUT**		_\<string\>_ 		    (Prefix of output files)
 
 ### Components
 
