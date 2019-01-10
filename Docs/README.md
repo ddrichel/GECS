@@ -6,8 +6,8 @@
 * [Installation](#Instalation)
 * [Description](#Description)
 * [Components](#Components)
-  * [Single marker analysis](#Single_marker_analysis)
-  * [Variable binning](#Variable_binning)
+  * [Single marker analysis](#Single_Marker_Analysis)
+  * [Variable binning](#Variable_Binning)
 * [Getting started](#Getting_started)
   * [Example 1](#Example_1)
   * [Example 2](#Example_2)
@@ -21,7 +21,7 @@
 ### Instalation
 
 clone GECS github repository
-execiute the make command in the cloned directory
+execute the make command in the cloned directory
 
 ### Description 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
@@ -35,20 +35,19 @@ This program uses the alglib c++ library.
 ##### Usage
 
 The usage of gecs is very simple. Only execute the follwoing command.
-
 gecs <~/path/to/file.param>
 
-Keywords in the parameter file [*/file.param] :
+Keywords in the parameter file [*/file.param]() :
 
-BFILE		string		  # prefix of the plink binary file
-SINGLEMARKER	bool		  # whether single-marker analysis should be performed instead of VB (default=0)	  
-PERMUTATIONS	int		  # number of permutations
-NCT		int		  # "rareness" threshold: max. number of carriers per variant
-MAFT            double            # Minor allele fequency threshold for rare variants
-PTHRESHOLD	double		  # max. nominal p-value for bins to be written to output files
-ALLBINS		bool		  # whether locally not-distinct bins should be written to output (useful for plotting, default=0)
-OR		bool		  # Whether odd ratios will be calculated or not.
-OUTPUT		string 		  # prefix of output files
+BFILE		string		      (prefix of the plink binary file)
+SINGLEMARKER	bool		  (whether single-marker analysis should be performed instead of VB (default=0))  
+PERMUTATIONS	int		   (number of permutations)
+NCT		int		           ("rareness" threshold: max. number of carriers per variant)
+MAFT double          (Minor allele fequency threshold for rare variants)
+PTHRESHOLD	double		  (max. nominal p-value for bins to be written to output files)
+ALLBINS		bool		      (whether locally not-distinct bins should be written to output (useful for plotting, default=0))
+OR		bool		           (Whether odd ratios will be calculated or not)
+OUTPUT		string 		    (Prefix of output files)
 
 ### Components
 
