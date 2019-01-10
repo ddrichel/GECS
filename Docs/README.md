@@ -20,7 +20,7 @@
 
 ### Instalation
 
-clone from github ddrichel repository
+clone GECS github repository
 execiute the make command in the cloned directory
 
 ### Description: 
