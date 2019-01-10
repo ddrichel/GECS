@@ -20,17 +20,18 @@
 
 ### Instalation
 
-clone GECS github repository
-execute the make command in the cloned directory
+git clone --recursive https://github.com/ddrichel/GECS
+cd GECS
+./configure?
+make
 
 ### Description 
-We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
+We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds. GECS is an ultra fast program that perform an exhaustive scan for association in case-control genetic data.
 
 ##### Prerequisites
 
 GECS is distributed under GPL3 license. Starting from GECS 1.1.1, it supports c++ (?) on linux systems.
 This program uses the alglib c++ library.
-
 
 ##### Usage
 
@@ -61,12 +62,12 @@ Keywords in the parameter file [*.param](https://github.com/ddrichel/GECS/tree/m
 
 ### Components
 
-The default feature of GECS is to conduct the exhaustive collapsing scan for association (SINGLEMARKER==0).
+The default feature of GECS is to conduct the exhaustive collapsing scan for association, for signle markers and subsequences of contiguous markers 
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
 -NOTICE- that in case of SINGLEMARKER==1, MAFT will be set to the maximum and the NCT and ALLBINS parameters will be ignored.
 Input and output string parameter are to cpecify only the name of input and output file without any extensions.
 
-#### Sigle_Marker_Analysis
+#### Sigle_Marker_Analysis (SINGLEMARKER==1).
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
 
 #### Variable_Binning
