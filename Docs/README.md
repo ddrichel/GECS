@@ -3,9 +3,16 @@
  ###### _Exhaustive scan for association in genmoic data_
 
 ### Table of contents
-1.[Description](#Description)
+[Installation](#Instalation)
 
-2.[Installation](#Instalation)
+[Description](#Description)
+
+[Components](#Components)
+
+[Single marker analysis](##SMA)
+
+[Variable binning](##VB)
+
 
 ### Description: 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
