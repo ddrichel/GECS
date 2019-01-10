@@ -39,7 +39,7 @@ gecs <~/path/to/file.param>
 
 Keywords in the parameter file [*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
 
-**BFILE** _string_         (prefix of the plink binary file)"
+**BFILE** _\<string\>_         (prefix of the plink binary file)"
 **SINGLEMARKER**	_bool_		  (whether single-marker analysis should be performed instead of VB (default=0))  
 **PERMUTATIONS**	_int_		   (number of permutations)
 **NCT**		_int_		           ("rareness" threshold: max. number of carriers per variant)
