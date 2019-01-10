@@ -92,8 +92,13 @@ Depends on the aim of analysis. if SINGLEMARKER==1, then the text file *Singlema
 If SINGLEMARKER==0, then the text file *VB.txt will be generated, which includes the results of the exhaustive scan for association.
 Additionally, two files will be always generated, namely *.pvals and *srt.pvals for the correction of multiple testing.
 -NOTICE- the final corrected alpha will be reported with other informations about the analysis in the *.log file.
+### Getting started
 
-* Deployment
+#### Example 1
+
+#### Example 2
+
+### Attributions
 
 * Versioning
 
