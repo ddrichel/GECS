@@ -9,10 +9,10 @@
   * [Single marker analysis](#Single_marker_analysis)
   * [Variable binning](#Variable_binning)
 * [Getting started](#Getting_started)
-  * [Example 1](#Example #1)
-  * [Example 2](#Example #2)
-  * [Example 3](Example 3)
-  * [Example 4](Example 4)
+  * [Example 1](#Example_1)
+  * [Example 2](#Example_2)
+  * [Example 3](Example_3)
+  * [Example 4](Example_4)
 * [Attributions](#Attributions)
   * [Authors](#Authors)
   * [Aknowledgment](#Acknowledgment)
@@ -57,10 +57,10 @@ If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all va
 -NOTICE- that in case of SINGLEMARKER==1, MAFT will be set to the maximum and the NCT and ALLBINS parameters will be ignored.
 Input and output string parameter are to cpecify only the name of input and output file without any extensions.
 
-#### Sigle marker analysis
+#### Sigle_Marker_Analysis
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
 
-#### Variable binning
+#### Variable_Binning
 -NOTICE- that sypecifying NCT will overwrite the parameter MAFT, otherwise, specifying only MAFT will be enough.
 ALLBINS paremeter is set to 0 for the default case, where only distinct bins will be considered. This feature is only usefull in case of scanning small regions for plotting purposes.
 
@@ -74,14 +74,14 @@ If SINGLEMARKER==0, then the text file *VB.txt will be generated, which includes
 Additionally, two files will be always generated, namely *.pvals and *srt.pvals for the correction of multiple testing.
 -NOTICE- the final corrected alpha will be reported with other informations about the analysis in the *.log file.
 
-### Getting started
+### Getting_started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-#### Example 1
-#### Example 2
-#### Example 3
-#### Example 4
+#### Example_1
+#### Example_2
+#### Example_3
+#### Example_4
 
 ### Attributions
 
