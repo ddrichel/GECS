@@ -21,8 +21,11 @@
 ### Instalation
 
 git clone --recursive https://github.com/ddrichel/GECS
+
 cd GECS
+
 ./configure?
+
 make
 
 ### Description 
