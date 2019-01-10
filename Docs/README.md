@@ -1,6 +1,10 @@
 
 # Genomic Exhaustive Collapsing Scans (GECS)
-#### -- Exhaustive scan for association in genmoic data
+ ###### _Exhaustive scan for association in genmoic data_
+
+### Table of contents
+1.[Description](#Description)
+2.[Installation](#Instalation)
 
 ### Description: 
 We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds.
@@ -30,7 +34,7 @@ These instructions will get you a copy of the project up and running on your loc
 GECS is distributed under GPL3 license. Starting from GECS 1.1.1, it supports c++ (?) on linux systems.
 This program uses the alglib c++ library.
 
-* Instalation
+### Instalation
 
 clone from github ddrichel repository
 execiute the make command in the cloned directory
