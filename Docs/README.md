@@ -100,6 +100,7 @@ In the [Examples](https://github.com/ddrichel/GECS/tree/master/Docs/DATA) you wi
 
 #### Authors
 Dmitriy Drichel -initial work-
+
 George Kanoungi
 
 #### License
