@@ -103,7 +103,7 @@ Dmitriy Drichel -initial work-
 George Kanoungi
 
 #### License
-This project is licensed under the MIT License - see the LICENSE.md file for details
+This project is licensed under the GNU General Public License v3.0 - see the LICENSE.md file for details
 
 #### Acknowledgment
 This project was supported by the German Research Foundation grant BE 38/28/9-1. The funding organization did not have any influence on the design, conduct or conclusions of the study.
