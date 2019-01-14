@@ -9,10 +9,7 @@
   * [Single marker analysis](#Single_Marker_Analysis)
   * [Variable binning](#Variable_Binning)
 * [Getting started](#Getting_started)
-  * [Example 1](#Example_1)
-  * [Example 2](#Example_2)
-  * [Example 3](Example_3)
-  * [Example 4](Example_4)
+  * [Examples](#Examples)
 * [Attributions](#Attributions)
   * [Authors](#Authors)
   * [Aknowledgment](#Acknowledgment)
@@ -92,7 +89,7 @@ Only
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 #### Examples
-execute gecs with one of the example parameter files which applys the anaylsis on an example data set 
+execute some examples of gecs included in the bash [file](https://github.com/ddrichel/GECS/blob/master/runSampleCode.sh)applied on an example data set 
 
 ### Attributions
 
