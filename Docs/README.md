@@ -89,7 +89,11 @@ Only
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 #### Examples
-execute some examples of gecs included in the bash [file](https://github.com/ddrichel/GECS/blob/master/runSampleCode.sh)applied on an example data set 
+execute some examples of gecs included in the bash [file](https://github.com/ddrichel/GECS/blob/master/runSampleCode.sh), applied on an example data set. In the examples you will try different combinations of parameter specifications for a specific goal in the anaylsis.
+1) Example 1 : You will perform a single marker analysis and use 999 permutations for correcting for multiple testing. Note no need to specify the minor allele frequency threshold (MAFT) or the threshold of number of cariers (NCT).
+2) Example 2: You will perform the variable binning approach instead of the single marker analysis, and here you are obligated to specify the parameter MAFT or the equivalent parameter NCT like in the example 3.
+3) Example 4: In this example a conflict in the values of NCT and MAFT will be solved by cosidering NCT always it is specified.
+4) Example 5: The SMA approach is applied on the chromosome 22 of a simulated sata set with 1000 sample size.
 
 ### Attributions
 
