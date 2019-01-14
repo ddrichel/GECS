@@ -47,19 +47,19 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 
 **SINGLEMARKER**	_\<bool\>_		  (whether single-marker analysis should be performed instead of VB (default=0))   
 
-**PERMUTATIONS**	_\<int\>_		   (number of permutations for correction of multiple testing) 
+**PERMUTATIONS**	_\<int\>_		   (number of permutations for correction of multiple testing, default=0) 
 
 **NCT**		_\<int\>_		           ("rareness" threshold: max. number of carriers per variant)
 
 **MAFT** _\<double\>_          (Minor allele fequency threshold for rare variants) 
 
-**PTHRESHOLD**	_\<double\>_		  (max. nominal p-value for bins to be written to output files)
+**PTHRESHOLD**	_\<double\>_		  (max. nominal p-value for bins to be written to output files, optional)
 
 **ALLBINS**		_\<bool\>_		      (whether locally not-distinct bins should be written to output (useful for plotting, default=0))
 
-**OR**		_\<bool\>_		           (Whether odd ratios will be calculated)
+**OR**		_\<bool\>_		           (Whether odd ratios will be calculated, optional)
 
-**CORRECTED_P** _\<bool\>_     (Whether calculated p values will be corrected by wilson score interval of CI 95%) 
+**CORRECTED_P** _\<bool\>_     (Whether calculated p values will be corrected by wilson score interval of CI 95%, optional) 
 
 **OUTPUT**		_\<string\>_ 		    (Prefix of output files)
 
@@ -91,23 +91,20 @@ Only
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-#### Example_1
-#### Example_2
-#### Example_3
-#### Example_4
+#### Examples
+execute gecs with one of the example parameter files which applys the anaylsis on an example data set 
 
 ### Attributions
 
 #### Authors
-
 Dmitriy Drichel -initial work-
+George Kanoungi
 
 #### License
-
 This project is licensed under the MIT License - see the LICENSE.md file for details
 
 #### Acknowledgment
-This project is financed by DFG.
+This project was supported by the German Research Foundation grant BE 38/28/9-1. The funding organization did not have any influence on the design, conduct or conclusions of the study.
 
 #### Citation
 Please site: George Kanoungi, Michael Nothnagel and Dmitriy Drichel. An exhaustive genomic scan (2019)
