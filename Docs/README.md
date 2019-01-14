@@ -41,7 +41,7 @@ This program uses the alglib c++ library.
 The usage of gecs is very simple. Only execute the follwoing command.
 gecs <~/path/to/file.param>
 
-Keywords in the parameter file [*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
+Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
 
 **BFILE** _\<string\>_         (prefix of the plink binary file) 
 
@@ -72,9 +72,9 @@ If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all va
 -NOTICE- that in case of SINGLEMARKER==1, MAFT will be set to the maximum and the NCT and ALLBINS parameters will be ignored.
 Input and output string parameter are to cpecify only the name of input and output file without any extensions.
 ###### Resulted files:
-1. A text file \[*_singlemarker.txt\], which includes the results of association tests for all included markers.
-2. Two files \[*_singlemarker.pvals\] and \[*_singlemarker.srt.pvals\] for the correction of multiple testing based on the null model.
--NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[*_gecs_nct_\<nct\>.log\] file.
+1. A text file \[\*_singlemarker.txt\], which includes the results of association tests for all included markers.
+2. Two files \[\*_singlemarker.pvals\] and \[\*_singlemarker.srt.pvals\] for the correction of multiple testing based on the null model.
+-NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
 
 #### Variable_Binning
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
@@ -82,10 +82,10 @@ In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same jo
 ALLBINS paremeter is set to 0 for the default case, where only distinct bins will be considered. This feature is only usefull in case of scanning small regions for plotting purposes.
 Only 
 ###### Resulted files:
-1. A text file \[*_gecs_\<nct\>.txt\], which includes the results of association tests for all genomic subsequences.
-2. Two files \[*_gecs_\<nct\>.pvals\] and \[*_gecs_\<nct\>.srt.pvals\] for the correction of multiple testing based on the null model.
+1. A text file \[\*_gecs_\<nct\>.txt\], which includes the results of association tests for all genomic subsequences.
+2. Two files \[\*_gecs_\<nct\>.pvals\] and \[\*_gecs_\<nct\>.srt.pvals\] for the correction of multiple testing based on the null model.
 
--NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[*_gecs_nct_\<nct\>.log\] file.
+-NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
 
 ### Getting_started
 
