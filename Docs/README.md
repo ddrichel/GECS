@@ -54,12 +54,9 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 |**PERMUTATIONS**|_\<int\>_|999|Number of permutations for correction of multiple testing|In order to control the familiy wise error rate (FWER) at the 5% level, gecs performs in default 999 permutations with respect to the case-control labels. In each permutation, we will obtaine the smallest p-value calculated in the analysis, so at the end we will have a list of 999 p values.|
 |**CORRECTED_P**|_\<bool\>_|0|Whether calculated p values will be corrected by wilson score interval of CI 95%|Using the results of the FWER approach we can correct the results of the analysis and calculate the upper and lower limits of the confidence interval of 95% usinf the wilson score interval.|
 |**PTHRESHOLD**|_\<double\>_|1|Max. nominal p-value for bins to be written to output files|By specifying this parameter you can restrict the results on only p-values less than a specific threshold. This feature is usefull in case of having a limited memory size.|
-
-**ALLBINS**		_\<bool\>_		      (whether locally not-distinct bins should be written to output (useful for plotting, default=0))
-
-**OR**		_\<bool\>_		           (Whether odd ratios will be calculated, default=0)
-
-**OUTPUT**		_\<string\>_ 		    (Prefix of output files, default=prefix of the plink binary file of the analyzed data)
+|**ALLBINS**|_\<bool\>_|0|whether locally not-distinct bins should be written to output (useful for plotting)||
+|**OR**|_\<bool\>_|0|Whether odd ratios will be calculated||
+|**OUTPUT**|_\<string\>_|prefix of the plink binary file of the analyzed data|Prefix of output files||
 
 ### Components
 
