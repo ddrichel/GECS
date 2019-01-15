@@ -2,23 +2,14 @@
 # Genomic Exhaustive Collapsing Scan (GECS)
  ###### _An exhaustive genomic scan for association in genetic data_
 
-##### Table of Contents  
-[Headers](#headers_and)  
-[Emphasis](#emphasis)  
-...snip...    
-<a name="headers_and"/>
-## Headers and
-
-
-
 ### Table of contents
 * [Installation](#Instalation)
 * [Description](#Description)
 * [Components](#Components)
-  * [Single marker analysis](#Single_Marker Analysis)
+  * [Single marker analysis](#SMA)
   * [Variable binning](#VB)
-  * [Correction for multple testing](#Correction)
-* [Getting started](#Getting)
+  * [Correction for multple testing](#CMT)
+* [Getting started](#GS)
   * [Examples](#Examples)
 * [Attributions](#Attributions)
   * [Authors](#Authors)
@@ -74,7 +65,8 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 
 GECS provides two major features for conducting association analysis for rare variants, namely for signle markers and for all possible bins (subsequences of contiguous markers) in the genetic data set. In the single marker analysis, all variants will be considered in the analysis, regardless of their frequencies. however, in the variable binning approach we need to specify a threshold of minor allele frequency. Permutations with respect to the case-control labels is applied to make correction for multiple testing. That means if PERMUTATIONS==0, then there is no correction for multiple testing will be done. Moreover, yoe have the possibility to get the corrected p values by wilson score interval for conficence interval of 95%. You have the option to calcutae the odds ratios for all bins by specifying OR 1. (OR=0 is by default)
 
-# Single Marker Analysis 
+<a name="SMA"/>
+#### Single Marker Analysis 
 
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
 
@@ -89,7 +81,7 @@ Input and output string parameter are to cpecify only the name of input and outp
 
 The final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
 
-#### VB
+<a name="VB"/>
 #### Variable Binning
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
 ###### *NOTICE* 
@@ -100,10 +92,12 @@ Only
 1. A text file \[\*_gecs_\<nct\>.txt\], which includes the results of association tests for all genomic subsequences.
 2. Two files \[\*_gecs_\<nct\>.pvals\] and \[\*_gecs_\<nct\>.srt.pvals\] for the correction of multiple testing based on the null model.
 
+<a name="CMT"/>
 #### Correction for maultiple testing
 
 the final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
 
+<a name="GS"/>
 ### Getting started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
