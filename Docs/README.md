@@ -66,12 +66,17 @@ GECS provides two major features for conducting association analysis for rare va
 
 #### Sigle_Marker_Analysis
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
--NOTICE- that in case of SINGLEMARKER==1, MAFT will be set to the maximum and the NCT and ALLBINS parameters will be ignored.
+
+#### *-NOTICE-* 
+
+In case of SINGLEMARKER==1, MAFT will be set to the maximum and the NCT and ALLBINS parameters will be ignored.
 Input and output string parameter are to cpecify only the name of input and output file without any extensions.
 ###### Resulted files:
 1. A text file \[\*_singlemarker.txt\], which includes the results of association tests for all included markers.
 2. Two files \[\*_singlemarker.pvals\] and \[\*_singlemarker.srt.pvals\] for the correction of multiple testing based on the null model.
--NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
+### *-NOTICE-* 
+
+The final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
 
 #### Variable_Binning
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
