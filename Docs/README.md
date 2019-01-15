@@ -45,8 +45,8 @@ The usage of gecs is very simple. Only execute the follwoing command.
 
 Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
 
-|KEY |_\<Input\>_|Default|Description|Notes|
-|-------|-------|------|------|
+| KEY | _\<Input\>_ | Default | Description | Notes |
+|----|---|-------|------|------|
 |**BFILE**|_\<string\>_|none| prefix of the plink binary file|With this parmater the name of the binary plink files \*.bed, \*.bim, and \*.fam of the data set will be specified.| 
 
    
