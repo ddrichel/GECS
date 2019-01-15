@@ -80,8 +80,9 @@ The final corrected alpha will be reported with other informations about the ana
 
 #### Variable_Binning
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
--NOTICE- that sypecifying NCT will overwrite the parameter MAFT, otherwise, specifying only MAFT will be enough.
-ALLBINS paremeter is set to 0 for the default case, where only distinct bins will be considered. This feature is only usefull in case of scanning small regions for plotting purposes.
+###### *NOTICE* 
+1) In case of specifying the both parameters NCT and MAFT, the NCT parameter will overwrite the parameter MAFT by default, otherwise, specifying only one parameter will be enough.
+2) ALLBINS paremeter is set to 0 for the default case, where only distinct bins will be considered. This feature is only usefull in case of scanning small regions for plotting purposes.
 Only 
 ###### Resulted files:
 1. A text file \[\*_gecs_\<nct\>.txt\], which includes the results of association tests for all genomic subsequences.
