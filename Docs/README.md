@@ -28,12 +28,12 @@ cd GECS
 make
 
 ### Description 
-We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF thresholds. GECS is an ultra fast program that perform an exhaustive scan for association in case-control genetic data, implemented in c++.
+We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF thresholds. GECS is an ultra fast program that perform an exhaustive scan for association in case-control genetic data, implemented in C++.
 
 ##### Prerequisites
 
-GECS is distributed under GPL3 license. Starting from GECS 1.1, it supports c++ (?) on linux systems.
-This program uses the alglib c++ library.
+GECS is distributed under GPL3 license. Starting from GECS 1.1, it supports C++ (?) on linux systems.
+This program uses the alglib C++ library.
 
 ##### Usage
 
@@ -47,23 +47,30 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 
 **BFILE** _\<string\>_         (prefix of the plink binary file)
 
-With this parmater the name of the binary plink files \*.bed, \*.bim, and \*.fam of the considered genetic data set will be specified.    
-**SINGLEMARKER**	_\<bool\>_		  (whether single-marker analysis should be performed instead of VB (default=0))   
-GECS can perform two kind of analysis. The standrad single marker analysis (SMA) and the variable binnig approarch (VB). The default option for GECS is the VB approach, where the parameter SINGLEMARKER=0. If SINGLEMARKER=1, then the single marker analysis will be performed.
-**PERMUTATIONS**	_\<int\>_		   (Number of permutations for correction of multiple testing, default=999)
+With this parmater the name of the binary plink files \*.bed, \*.bim, and \*.fam of the data set will be specified.    
 
-The correction for multiple testing is done by permutations, where the default number of permutations is 999.
+**SINGLEMARKER**	_\<bool\>_		  (whether single-marker analysis should be performed instead of VB (default=0))   
+
+GECS can perform two kind of analysis. The standrad single marker analysis (SMA) and the variable binnig approarch (VB). The default option for GECS is the VB approach, where the parameter SINGLEMARKER=0. If SINGLEMARKER=1, then the single marker analysis will be performed. In  oposite to SMA, where all variants regardless of their minor allele frequencies, in VB approach we need to specify the threshold of variants included in the analysis. In other words defining the rareness of the included variants. GECS use the threshold of number of cariers (NCT) to derive the minor allele frequnecy threshold (MAFT). Therefore we need to specify at least one of the fllowing two equivalent parameters.
+
 **NCT**		_\<int\>_		           ("rareness" threshold: max. number of carriers per variant)
 
 **MAFT** _\<double\>_          (Minor allele fequency threshold for rare variants) 
 
+**PERMUTATIONS**	_\<int\>_		   (Number of permutations for correction of multiple testing, default=999)
+
+In order to control the familiy wise error rate (FWER) at the 5% level, gecs performs in default 999 permutations with respect to the case-control labels. In each permutation, we will obtaine the smallest p-value calculated in the analysis, so at the end we will have a list of 999 p values.
+
+**CORRECTED_P** _\<bool\>_     (Whether calculated p values will be corrected by wilson score interval of CI 95%, default=0) 
+
+Using the results of the FWER approach we can correct the results of the analysis and calculate the upper and lower limits of the confidence interval of 95% usinf the wilson score interval.
+
 **PTHRESHOLD**	_\<double\>_		  (max. nominal p-value for bins to be written to output files, default=1)
+By specifying this parameter you can restrict the results on only p-values less than a specific threshold. This feature is usefull in case of having a limited memory size.
 
 **ALLBINS**		_\<bool\>_		      (whether locally not-distinct bins should be written to output (useful for plotting, default=0))
 
 **OR**		_\<bool\>_		           (Whether odd ratios will be calculated, default=0)
-
-**CORRECTED_P** _\<bool\>_     (Whether calculated p values will be corrected by wilson score interval of CI 95%, default=0) 
 
 **OUTPUT**		_\<string\>_ 		    (Prefix of output files, default=prefix of the plink binary file of the analyzed data)
 
