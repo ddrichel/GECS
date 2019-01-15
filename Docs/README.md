@@ -38,7 +38,10 @@ This program uses the alglib c++ library.
 ##### Usage
 
 The usage of gecs is very simple. Only execute the follwoing command.
-gecs <~/path/to/file.param>
+
+**gecs** <~/path/to/**file.param**>
+
+**gecs --help** will present a breef description of the important parameters to specify in the parameter file.
 
 Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
 
