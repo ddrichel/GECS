@@ -48,12 +48,7 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 | KEY | _\<Input\>_ | Default | Description | Notes |
 |----|---|-------|------|------|
 |**BFILE**|_\<string\>_|none| prefix of the plink binary file|With this parmater the name of the binary plink files \*.bed, \*.bim, and \*.fam of the data set will be specified.| 
-
-   
-
-**SINGLEMARKER**	_\<bool\>_		  (whether single-marker analysis should be performed instead of VB (default=0))   
-
-GECS can perform two kind of analysis. The standrad single marker analysis (SMA) and the variable binnig approarch (VB). The default option for GECS is the VB approach, where the parameter SINGLEMARKER=0. If SINGLEMARKER=1, then the single marker analysis will be performed. In  oposite to SMA, where all variants regardless of their minor allele frequencies, in VB approach we need to specify the threshold of variants included in the analysis. In other words defining the rareness of the included variants. GECS use the threshold of number of cariers (NCT) to derive the minor allele frequnecy threshold (MAFT). Therefore we need to specify at least one of the fllowing two equivalent parameters.
+|**SINGLEMARKER**|	_\<bool\>_|0|whether single-marker analysis should be performed instead of VB|GECS can perform two kind of analysis. The standrad single marker analysis (SMA) and the variable binnig approarch (VB). The default option for GECS is the VB approach, where the parameter SINGLEMARKER=0. If SINGLEMARKER=1, then the single marker analysis will be performed. In  oposite to SMA, where all variants regardless of their minor allele frequencies, in VB approach we need to specify the threshold of variants included in the analysis. In other words defining the rareness of the included variants. GECS use the threshold of number of cariers (NCT) to derive the minor allele frequnecy threshold (MAFT). Therefore we need to specify at least one of the fllowing two equivalent parameters.|
 
 **NCT**		_\<int\>_		           ("rareness" threshold: max. number of carriers per variant)
 
