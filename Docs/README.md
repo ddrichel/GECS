@@ -3,10 +3,10 @@
  ###### _An exhaustive genomic scan for association in genetic data_
 
 ##### Table of Contents  
-[Headers](#headers and)  
+[Headers](#headers_and)  
 [Emphasis](#emphasis)  
 ...snip...    
-<a name="headers and"/>
+<a name="headers_and"/>
 ## Headers
 
 
