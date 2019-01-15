@@ -46,11 +46,13 @@ The usage of gecs is very simple. Only execute the follwoing command.
 Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
 
 **BFILE** _\<string\>_         (prefix of the plink binary file)
-GECS needs the binary plink files \*.bed, \*.bim, and \*.fam.   
+
+With this parmater the name of the binary plink files \*.bed, \*.bim, and \*.fam of the considered genetic data set will be specified.    
 **SINGLEMARKER**	_\<bool\>_		  (whether single-marker analysis should be performed instead of VB (default=0))   
+GECS can perform two kind of analysis. The standrad single marker analysis (SMA) and the variable binnig approarch (VB). The default option for GECS is the VB approach, where the parameter SINGLEMARKER=0. If SINGLEMARKER=1, then the single marker analysis will be performed.
+**PERMUTATIONS**	_\<int\>_		   (Number of permutations for correction of multiple testing, default=999)
 
-**PERMUTATIONS**	_\<int\>_		   (number of permutations for correction of multiple testing, default=0) 
-
+The correction for multiple testing is done by permutations, where the default number of permutations is 999.
 **NCT**		_\<int\>_		           ("rareness" threshold: max. number of carriers per variant)
 
 **MAFT** _\<double\>_          (Minor allele fequency threshold for rare variants) 
