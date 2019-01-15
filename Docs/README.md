@@ -6,9 +6,10 @@
 * [Installation](#Instalation)
 * [Description](#Description)
 * [Components](#Components)
-  * [Single marker analysis](#Single_Marker_Analysis)
-  * [Variable binning](#Variable_Binning)
-* [Getting started](#Getting_started)
+  * [Single marker analysis](#Single)
+  * [Variable binning](#Variable)
+  * [Correction for multple testing](#Correction)
+* [Getting started](#Getting)
   * [Examples](#Examples)
 * [Attributions](#Attributions)
   * [Authors](#Authors)
@@ -64,7 +65,7 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 
 GECS provides two major features for conducting association analysis for rare variants, namely for signle markers and for all possible bins (subsequences of contiguous markers) in the genetic data set. In the single marker analysis, all variants will be considered in the analysis, regardless of their frequencies. however, in the variable binning approach we need to specify a threshold of minor allele frequency. Permutations with respect to the case-control labels is applied to make correction for multiple testing. That means if PERMUTATIONS==0, then there is no correction for multiple testing will be done. Moreover, yoe have the possibility to get the corrected p values by wilson score interval for conficence interval of 95%. You have the option to calcutae the odds ratios for all bins by specifying OR 1. (OR=0 is by default)
 
-#### Single_Marker_Analysis
+#### Single Marker Analysis
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
 
 ###### *NOTICE* 
@@ -78,7 +79,7 @@ Input and output string parameter are to cpecify only the name of input and outp
 
 The final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
 
-#### Variable_Binning
+#### Variable Binning
 In the default case (SINGLEMARKER==0) the parameters NCT and MAFT do the same job, which determinig the rareness threshold for the analysis.
 ###### *NOTICE* 
 1) In case of specifying the both parameters NCT and MAFT, the NCT parameter will overwrite the parameter MAFT by default, otherwise, specifying only one parameter will be enough.
@@ -88,9 +89,11 @@ Only
 1. A text file \[\*_gecs_\<nct\>.txt\], which includes the results of association tests for all genomic subsequences.
 2. Two files \[\*_gecs_\<nct\>.pvals\] and \[\*_gecs_\<nct\>.srt.pvals\] for the correction of multiple testing based on the null model.
 
--NOTICE- the final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
+#### Correction for maultiple testing
 
-### Getting_started
+the final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
+
+### Getting started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
