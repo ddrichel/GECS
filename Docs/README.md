@@ -13,6 +13,7 @@
   * [Examples](#Examples)
 * [Attributions](#Attributions)
   * [Authors](#Authors)
+  * [License](#License)
   * [Aknowledgment](#Acknowledgment)
   * [Citation](#Citation)
 
