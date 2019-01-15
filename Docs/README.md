@@ -45,8 +45,8 @@ The usage of gecs is very simple. Only execute the follwoing command.
 
 Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
 
-**BFILE** _\<string\>_         (prefix of the plink binary file) 
-
+**BFILE** _\<string\>_         (prefix of the plink binary file)
+GECS needs the binary plink files \*.bed, \*.bim, and \*.fam.  
 **SINGLEMARKER**	_\<bool\>_		  (whether single-marker analysis should be performed instead of VB (default=0))   
 
 **PERMUTATIONS**	_\<int\>_		   (number of permutations for correction of multiple testing, default=0) 
