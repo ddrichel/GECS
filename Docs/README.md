@@ -28,11 +28,11 @@ cd GECS
 make
 
 ### Description 
-We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF tresholds. GECS is an ultra fast program that perform an exhaustive scan for association in case-control genetic data, implemented in c++.
+We developed a new approach to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets, by variating bins sizes and MAF thresholds. GECS is an ultra fast program that perform an exhaustive scan for association in case-control genetic data, implemented in c++.
 
 ##### Prerequisites
 
-GECS is distributed under GPL3 license. Starting from GECS 1.1.1, it supports c++ (?) on linux systems.
+GECS is distributed under GPL3 license. Starting from GECS 1.1, it supports c++ (?) on linux systems.
 This program uses the alglib c++ library.
 
 ##### Usage
@@ -52,15 +52,15 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 
 **MAFT** _\<double\>_          (Minor allele fequency threshold for rare variants) 
 
-**PTHRESHOLD**	_\<double\>_		  (max. nominal p-value for bins to be written to output files, optional)
+**PTHRESHOLD**	_\<double\>_		  (max. nominal p-value for bins to be written to output files, default=1)
 
 **ALLBINS**		_\<bool\>_		      (whether locally not-distinct bins should be written to output (useful for plotting, default=0))
 
-**OR**		_\<bool\>_		           (Whether odd ratios will be calculated, optional)
+**OR**		_\<bool\>_		           (Whether odd ratios will be calculated, default=0)
 
-**CORRECTED_P** _\<bool\>_     (Whether calculated p values will be corrected by wilson score interval of CI 95%, optional) 
+**CORRECTED_P** _\<bool\>_     (Whether calculated p values will be corrected by wilson score interval of CI 95%, default=0) 
 
-**OUTPUT**		_\<string\>_ 		    (Prefix of output files)
+**OUTPUT**		_\<string\>_ 		    (Prefix of output files, default=prefix of the plink binary file of the analyzed data)
 
 ### Components
 
@@ -70,7 +70,7 @@ GECS provides two major features for conducting association analysis for rare va
 
 #### Single Marker Analysis 
 
-If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
+If SINGLEMARKER==1, then the analysis conducted by GECS will perform only the single-marker test on all variants included in the analysis.
 
 ###### *NOTICE* 
 
@@ -99,7 +99,10 @@ Only
 
 #### Correction for maultiple testing
 
+The correction for multiple testing is achieved by performing permutation 
 the final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
+
+
 
 <a name="GS"/>
 
