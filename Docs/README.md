@@ -6,7 +6,7 @@
 * [Installation](#Instalation)
 * [Description](#Description)
 * [Components](#Components)
-  * [Single marker analysis](####Single Marker Analysis)
+  * [Single marker analysis](#Single #Marker #Analysis)
   * [Variable binning](#Variable)
   * [Correction for multple testing](#Correction)
 * [Getting started](#Getting)
