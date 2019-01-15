@@ -6,8 +6,8 @@
 * [Installation](#Instalation)
 * [Description](#Description)
 * [Components](#Components)
-  * [Single marker analysis](#Single #Marker #Analysis)
-  * [Variable binning](#Variable)
+  * [Single marker analysis](#SMA)
+  * [Variable binning](#VB)
   * [Correction for multple testing](#Correction)
 * [Getting started](#Getting)
   * [Examples](#Examples)
@@ -65,7 +65,9 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 
 GECS provides two major features for conducting association analysis for rare variants, namely for signle markers and for all possible bins (subsequences of contiguous markers) in the genetic data set. In the single marker analysis, all variants will be considered in the analysis, regardless of their frequencies. however, in the variable binning approach we need to specify a threshold of minor allele frequency. Permutations with respect to the case-control labels is applied to make correction for multiple testing. That means if PERMUTATIONS==0, then there is no correction for multiple testing will be done. Moreover, yoe have the possibility to get the corrected p values by wilson score interval for conficence interval of 95%. You have the option to calcutae the odds ratios for all bins by specifying OR 1. (OR=0 is by default)
 
-#### Single Marker Analysis
+#### SMA 
+*Single Marker Analysis*
+
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
 
 ###### *NOTICE* 
