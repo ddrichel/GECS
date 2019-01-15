@@ -64,17 +64,17 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 
 GECS provides two major features for conducting association analysis for rare variants, namely for signle markers and for all possible bins (subsequences of contiguous markers) in the genetic data set. In the single marker analysis, all variants will be considered in the analysis, regardless of their frequencies. however, in the variable binning approach we need to specify a threshold of minor allele frequency. Permutations with respect to the case-control labels is applied to make correction for multiple testing. That means if PERMUTATIONS==0, then there is no correction for multiple testing will be done. Moreover, yoe have the possibility to get the corrected p values by wilson score interval for conficence interval of 95%. You have the option to calcutae the odds ratios for all bins by specifying OR==1. (OR=0 is by default)
 
-#### Sigle_Marker_Analysis
+#### Single_Marker_Analysis
 If SINGLEMARKER==1, then GECS will conduct only the single-marker test on all variants included in the analysis.
 
-#### *-NOTICE-* 
+###### *NOTICE* 
 
 In case of SINGLEMARKER==1, MAFT will be set to the maximum and the NCT and ALLBINS parameters will be ignored.
 Input and output string parameter are to cpecify only the name of input and output file without any extensions.
 ###### Resulted files:
 1. A text file \[\*_singlemarker.txt\], which includes the results of association tests for all included markers.
 2. Two files \[\*_singlemarker.pvals\] and \[\*_singlemarker.srt.pvals\] for the correction of multiple testing based on the null model.
-### *-NOTICE-* 
+###### *NOTICE* 
 
 The final corrected alpha will be reported with other informations about the analysis in the \[\*_gecs_nct_\<nct\>.log\] file.
 
