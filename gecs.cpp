@@ -88,10 +88,12 @@ int main(int argc, char *argv[]) {
     if (argc<2){
 	die("Parameter file required!");
     }
-    if(arg == "--help" || arg == "-help" || arg == "-h" || arg == "--h"){
-        std::cout << "All parameters to GECS can be passed only by the parameter file ~/path_to/*.param\n";
+    if(strcmp(argv[1],"--help")==0 || strcmp(argv[1],"-help")==0 || strcmp(argv[1],"--h")==0 || strcmp(argv[1],"-h")==0)
+    {
+    std::cerr<<USAGE_MESSAGE;
+    return 0;
     }
-
+    #
     cout<<"-- GECS: genomic exhaustive collapsing scan --\n"<<endl;
     cout<<"Scan started:"<<time(0)<<endl;
     // read paramters
