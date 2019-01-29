@@ -2,21 +2,23 @@ const uint8_t mask8bit[4]={1,4,16,64};
 const uint64_t mask64bit[64] = {0x8000000000000000ull,0x4000000000000000ull,0x2000000000000000ull,0x1000000000000000ull,0x800000000000000ull,0x400000000000000ull,0x200000000000000ull,0x100000000000000ull,0x80000000000000ull,0x40000000000000ull,0x20000000000000ull,0x10000000000000ull,0x8000000000000ull,0x4000000000000ull,0x2000000000000ull,0x1000000000000ull,0x800000000000ull,0x400000000000ull,0x200000000000ull,0x100000000000ull,0x80000000000ull,0x40000000000ull,0x20000000000ull,0x10000000000ull,0x8000000000ull,0x4000000000ull,0x2000000000ull,0x1000000000ull,0x800000000ull,0x400000000ull,0x200000000ull,0x100000000ull,0x80000000ull,0x40000000ull,0x20000000ull,0x10000000ull,0x8000000ull,0x4000000ull,0x2000000ull,0x1000000ull,0x800000ull,0x400000ull,0x200000ull,0x100000ull,0x80000ull,0x40000ull,0x20000ull,0x10000ull,0x8000ull,0x4000ull,0x2000ull,0x1000ull,0x800ull,0x400ull,0x200ull,0x100ull,0x80ull,0x40ull,0x20ull,0x10ull,0x8ull,0x4ull,0x2ull,0x1ull};
 
 static const char *USAGE_MESSAGE =
-"Program: GECS -- An Exhaustive genomic scan for association analysis of rare variants. Copyright (2019)\n\n"
+"GECS - Genomic Exhaustive Collapsing Scan for association analysis of rare variants\n"
+"Copyright George Kanoungi, Dmitriy Drichel (2019)\n"
+"Version 1.1\n\n"
+  
 "All parameters to GECS can be passed only by the parameter file ~/path_to/*.param\n"
-"Usage: ./gecs ~/path_to/*.param\n"
-"Content of param file:\n"
-"KEY\t<INPUT>\t//OPTIONS\n\n"
-"BFILE\t<string>\t//plink binary file without extension\n"
-"PERMUTATIONS\t<integer>\t// number of permutations, default=0\n"
-"SINGLEMARKER\t<bool>\t// perform single marker analysis(SMA) or variable binning(VB), default=1(VB), if 1 then at least one of the next two parameters has to be specified\n"
-"NCT\t<integer>\t// Threshold of the number of cariers, equivalent to MAFT, appeares in name of output files\n"
-"MAFT\t<double>\t// Minor allele frequency threshold, it corresponding NCT will be calculated and used in the name of output files\n"
-"OR\t<bool>\t//Whether odds ratio should be calculated, default=0\n"
-"CORRECTED_P\t<bool>\t//Whether calculated p values will be corrected by wilson score interval of CI 95%, default=0\n"
-"PTHRESHOLD\t<double>\t//Max. nominal p-value for bins to be written to output files, default=1\n"
-"ALLBINS\t<bool>\t//whether locally not-distinct bins should be written to output, useful for plotting, default=0\n"
-"OUTPUTNAME\t<string>\t// output without extension\n\n\n"
+"Usage: ./gecs ~/path_to/*.param\n\n"
+"Content of param file:\n\n"
+"BFILE\t<string>\t// Prefix of the plink binary file\n"
+"PERMUTATIONS\t<integer>\t// Number of permutations, default=0\n"
+"SINGLEMARKER\t<bool>\t// Perform pointwise single marker analysis (SMA) instead of the region-based exhaustive scan, default=0\n"
+"NCT\t<integer>\t// Threshold of the number of carriers, (equivalent to MAFT)\n"
+"MAFT\t<double>\t// Minor allele frequency threshold, alternative to the NCT keyword\n"
+"OR\t<bool>\t// Whether the odds ratios should be calculated, default=0\n"
+"CORRECTED_P\t<bool>\t// Whether corrected p-values with Wilson score interval of CI 95% shall be computed, default=0\n"
+"PTHRESHOLD\t<double>\t// Max. nominal p-value for bins to be written to output files, default=1\n"
+"ALLBINS\t<bool>\t// Whether locally not-distinct bins should be written to output (useful for plotting of small regions), default=0\n"
+"OUTPUTNAME\t<string>\t// Output prefix\n\n\n"
 "For more information please check the README file\n\n"
 "--ENJOY!!--\n\n";
 
