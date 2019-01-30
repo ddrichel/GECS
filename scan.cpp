@@ -15,7 +15,7 @@
 using namespace std;
 
 
-// Begin: some of assistent functions
+// Begin: some assistant functions
 int compareint (const void * a, const void * b)
 {
     return ( *(int*)a - *(int*)b );
@@ -52,7 +52,7 @@ double wilson_upper(int ncount, int pcount)
     return min((double)1,((phat + z*z/(2*ncount) + z * sqrt((phat*(1-phat)+z*z/(4*ncount))/ncount))/(1+z*z/ncount)));
 }
 
-// End: some of assistent functions
+// End: some assistant functions
 // #
 // Begin: Main SMA function
 
@@ -66,7 +66,7 @@ void calc_singlemarker(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t n
     if(!singlemarkerout) die("singlemarkerout can not be opened!");
     
     singlemarkerout << "#INFO:";
-    singlemarkerout<<"NSIM="<<nsim<<";";
+    singlemarkerout<<"SIMULATIONS="<<nsim<<";";
     singlemarkerout << "NCT="<<NCT<<";";
     singlemarkerout<<"\n";
     singlemarkerout<<"chr\tpos_bp\tpos_var_nr\tcarriers\tp";
