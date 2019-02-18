@@ -1,0 +1,6 @@
+BFILE ./DATA/example	// plink binary file without extension
+SINGLEMARKER 1 	     // perform single marker analysis instead of VB
+PERMUTATIONS 999       // number of permutations
+OR 1
+CORR_P 1
+OUTPUTNAME ./DATA/example	     // output without extension

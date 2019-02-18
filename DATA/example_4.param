@@ -1,0 +1,7 @@
+BFILE ./DATA/example	// plink binary file without extension
+SINGLEMARKER 0	     // perform single marker analysis instead of VB
+PERMUTATIONS 99       // number of permutations
+MAFT 0.01		// NOTICE: A conflict between NCT and MAFT!!!
+NCT 25			// NCT will be considered, and appeared in name of output files
+OR 1
+OUTPUTNAME ./DATA/example	     // output without extension

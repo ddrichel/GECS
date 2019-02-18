@@ -5,7 +5,7 @@
 #
 # This file is part of GECS, an application to conduct association analysis for rare variants exhaustively in whole-genome or whole-exome data sets.
 #
-# Copyright (C) 2018 -  Dmitriy Drichel & George Kanoungi (ddrichel@uni-koeln.de, gkanoung@uni-koeln.de)
+# Copyright George Kanoungi, Dmitriy Drichel (2019) (george.kanoungi@uni-koeln.de, dmitriy@drichel-analytics.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,8 +41,8 @@
 # Use for that the command "bash runSampleCode.sh" 
 
 
-./gecs ./Docs/DATA/example_1.param
-#./gecs ./Docs/DATA/example_2.param
-#./gecs ./Docs/DATA/example_3.param
-#./gecs ./Docs/DATA/example_4.param
-#./gecs ./Docs/DATA/example_5.param
+./gecs ./DATA/example_1.param
+#./gecs ./DATA/example_2.param
+#./gecs ./DATA/example_3.param
+#./gecs ./DATA/example_4.param
+#./gecs ./DATA/example_5.param
