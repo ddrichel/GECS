@@ -126,4 +126,4 @@ This project is licensed under the GNU General Public License v3.0 - see the LIC
 This project was supported by the German Research Foundation grant BE 38/28/9-1. The funding organization did not have any influence on the design, conduct or conclusions of the study.
 
 #### Citation
-Please site: George Kanoungi, Michael Nothnagel and Dmitriy Drichel. An exhaustive genomic scan (2019)
+Please site: George Kanoungi, Tim Becker, Michael Nothnagel and Dmitriy Drichel. An exhaustive genomic scan (2019)
