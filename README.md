@@ -43,7 +43,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### Examples
 execute some examples of gecs included in the bash [file](https://github.com/ddrichel/GECS/blob/master/runSampleCode.sh), applied on an example data set. 
-In the [Examples](https://github.com/ddrichel/GECS/tree/master/Docs/DATA) you will try different combinations of parameter specifications for a specific goal in the analysis.
+In the [Examples](https://github.com/ddrichel/GECS/tree/master/DATA) you will try different combinations of parameter specifications for a specific goal in the analysis.
 1) Example 1 : You will perform a single marker analysis and use 999 permutations for correcting for multiple testing. Note no need to specify the minor allele frequency threshold (MAFT) or the threshold of number of carriers (NCT).
 2) Example 2: You will perform the variable binning approach instead of the single marker analysis, and here you are obligated to specify the parameter MAFT or the equivalent parameter NCT like in the example 3.
 3) Example 4: In this example a conflict in the values of NCT and MAFT will be solved by considering NCT always it is specified.
@@ -59,7 +59,7 @@ The usage of gecs is:
 
 **gecs --help** will present a brief description of the keywords in the parameter file.
 
-Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/master/Docs/DATA/example_1.param) :
+Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/master/DATA/example_1.param) :
 
 | KEY | _\<Input\>_ | Default | Description | Notes |
 |----|---|-------|------|------|
@@ -126,4 +126,4 @@ This project is licensed under the GNU General Public License v3.0 - see the LIC
 This project was supported by the German Research Foundation grant BE 38/28/9-1. The funding organization did not have any influence on the design, conduct or conclusions of the study.
 
 #### Citation
-Please site: George Kanoungi, Tim Becker, Michael Nothnagel and Dmitriy Drichel. An exhaustive genomic scan (2019)
+Please site: George Kanoungi, Tim Becker, Michael Nothnagel and Dmitriy Drichel. The exhaustive genomic scan approach and its application to rare variant association analysis (2019)
