@@ -1,6 +1,0 @@
-This is a discription of the example data included with gecs package
-Data files are in plink binary file format. 
-Example data is a data set of 100kb genomic region simulated in 1000 samples, divided equally between cases and controls.
-Data simulated using the HAPGEN2 and SimRare softwares
-
-
