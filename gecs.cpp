@@ -445,11 +445,6 @@ read bed file
 	cout<<"No rare variants left! Choose a higher NCT or MAFT!"<<endl;
 	exit(1);
     }
-    else if(rarevariants==1)
-    {
-	cout<<"1 rare variant left! Choose a higher NCT or MAFT!"<<endl;
-        exit(1);
-    }
     strm<<rarevariants<<" rare variants"<<endl;
     logg(strm);
     strm.str(string());
