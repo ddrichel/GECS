@@ -52,11 +52,24 @@ double wilson_upper(int ncount, int pcount)
     return min((double)1,((phat + z*z/(2*ncount) + z * sqrt((phat*(1-phat)+z*z/(4*ncount))/ncount))/(1+z*z/ncount)));
 }
 
+double orconf_lower(double OR, int a, int b, int c, int d)
+{
+    double z = 1.96;
+    return exp(log(OR)-z*sqrt(1/float(a)+1/float(b)+1/float(c)+1/float(d)));
+}
+
+double orconf_upper(double OR, int a, int b, int c, int d)
+{
+    double z = 1.96;
+    return exp(log(OR)+z*sqrt(1/float(a)+1/float(b)+1/float(c)+1/float(d)));
+}
+
+
 // End: some assistant functions
 // #
 // Begin: Main SMA function
 
-void calc_singlemarker(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols, struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, bool odds)
+void calc_singlemarker(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols, struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, bool odds, bool oddsconf)
 {
 
     //* Initiate and print out the table's header of the results
@@ -71,6 +84,7 @@ void calc_singlemarker(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t n
     singlemarkerout<<"\n";
     singlemarkerout<<"chr\tpos_bp\tpos_var_nr\tcarriers\tp";
     if(odds) singlemarkerout<<"\tOR";
+    if(odds && oddsconf) singlemarkerout<<"[95%CI]";
     singlemarkerout<<"\n";
 
     double *pvaluesMC=new double[nsim]();
@@ -140,7 +154,12 @@ void calc_singlemarker(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t n
 		{
 			singlemarkerout<<map[window[l].index[n1]].chr<<"\t"<<map[window[l].index[n1]].pos<<"\t"<<n1+1<<"\t"<<window[l].Ind[n1]<<"\t"<<pvalue;
 			if (odds) singlemarkerout<<"\t"<<OR_COLL;
-			singlemarkerout<<endl;
+			if(odds && oddsconf){
+			  if(OR_COLL!=-9999 && sX!=0 && ncases-sX!=0 && sY!=0 && ncontrols-sY!=0){
+			    singlemarkerout<<"["<<orconf_lower(OR_COLL, sX, ncases-sX, sY, ncontrols-sY)<<","<<orconf_upper(OR_COLL, sX, ncases-sX, sY, ncontrols-sY)<<"]";
+			  }
+			}
+			singlemarkerout<<"\n";
 		}
                 
                 for(int n=1; n<nsim+1; n++)
@@ -238,7 +257,7 @@ void calc_singlemarker(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t n
 // Begin: Main GECS with variable binning for all possible bins (without reductions)
 // NOTICE: This function will be usefull for plotting aims in small genomic regions
  
-void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols,  struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, bool odds)
+void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols,  struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, bool odds, bool oddsconf)
 {
  
     int nindiv=ncases+ncontrols;
@@ -257,6 +276,8 @@ void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nword
     rareVB<<"\n";
     rareVB<<"chr\tstart_bp\tend_bp\tstart_var_nr\tend_var_nr\tcarriers\tp";
     if (odds) rareVB<<"\tOR";
+    if(odds && oddsconf) rareVB<<"[95%CI]";
+
     rareVB<<"\n";
 
 
@@ -354,7 +375,12 @@ void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nword
 		    {
 	    		rareVB<<map[window[l].index[n1]].chr<<"\t"<<map[window[l].index[n1]].pos<<"\t"<<map[window[l].index[n2]].pos<<"\t"<<n1+1<<"\t"<<n2+1<<"\t"<<Ind1[0]<<"\t"<<pvalue;
 	    		if (odds) rareVB<<"\t"<<OR_COLL;
-	    		rareVB<<endl;
+			if(odds && oddsconf){
+			  if(OR_COLL!=-9999 && sX!=0 && ncases-sX!=0 && sY!=0 && ncontrols-sY!=0){
+			    rareVB<<"["<<orconf_lower(OR_COLL, sX, ncases-sX, sY, ncontrols-sY)<<","<<orconf_upper(OR_COLL, sX, ncases-sX, sY, ncontrols-sY)<<"]";
+			  }
+			}
+			rareVB<<endl;
 		    }
 		}
 	    }
@@ -376,7 +402,7 @@ void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nword
     cout<<"\ndone!"<<endl;
 }
 
-void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols, struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, int verbose, bool odds)
+void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols, struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, int verbose, bool odds, bool oddsconf)
 {
     long unsigned int nbinsdistinct=0;
     long unsigned int nbinsnaive=0;
@@ -400,6 +426,8 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
     rareVB<<"chr\tstart_bp\tend_bp\tstart_var_nr\tend_var_nr\tcarriers\tp";
     if(verbose) rareVB<<"\tstat";
     if(odds) rareVB<<"\tOR";
+    if(odds && oddsconf) rareVB<<"[95%CI]";
+
     rareVB<<"\n";
 
     double *pvaluesMC=new double[nsim]();
@@ -536,9 +564,14 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
                     {
                         OR_COLL=(double)sX*((double)ncontrols-(double)sY)/((double)sY*((double)ncases-(double)sX));
                     }
-                    rareVB<<"\t"<<OR_COLL<<endl;
+                    rareVB<<"\t"<<OR_COLL;
+		    if(odds && oddsconf){
+		      if(OR_COLL!=-9999 && sX!=0 && ncases-sX!=0 && sY!=0 && ncontrols-sY!=0){
+			rareVB<<"["<<orconf_lower(OR_COLL, sX, ncases-sX, sY, ncontrols-sY)<<","<<orconf_upper(OR_COLL, sX, ncases-sX, sY, ncontrols-sY)<<"]";
+		      }
+		    }
                 }
-		else rareVB<<endl;
+		rareVB<<"\n";
 		}
 
 		for(int n=1; n<nsim+1; n++) 

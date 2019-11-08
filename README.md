@@ -74,7 +74,8 @@ Keywords in the parameter file [\*.param](https://github.com/ddrichel/GECS/tree/
 |**CORRECTED_P**|_\<bool\>_|0|Whether the permutation-adjusted p-values will be written to output, together with the 95% CI (Wilson score interval) |Useful if the data set can be analyzed in a single run. Adjustment is performed for a single "rareness" threshold |
 |**PTHRESHOLD**|_\<double\>_|1|Max. nominal p-value for bins to be written to output|By specifying this parameter you can restrict the results on only p-values less than a specific threshold. This feature is usefull for controlling the size of output files|
 |**ALLBINS**|_\<bool\>_|0|Whether locally not-distinct bins should be written to output (useful for plotting and testing)|Use with caution and small input files, otherwise the output can be become extremely large. Therefore, no correction for multiple testing is possible for this process (PERMUTATIONS will be set to 0)|
-|**OR**|_\<bool\>_|0|Whether the odd ratios should be calculated||
+|**OR**|_\<bool\>_|0|Whether the odds ratios should be calculated||
+|**ORCONFIDENCE**|_\<bool\>_|0|Whether the 95% confidence interval should be calculated for odds ratios||
 |**OUTPUT**|_\<string\>_|Prefix of the input file|Prefix of output files||
 
 ### Functionality

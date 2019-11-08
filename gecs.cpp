@@ -74,6 +74,7 @@ int nsim = 0;
 int minindiv=0;
 double pthresh=1;
 int odds = 0;
+int oddsconf = 0;
 
 // random seeds
 int ix = 2505;
@@ -165,6 +166,12 @@ int main(int argc, char *argv[]) {
 	        cout<<id<<" "<<val<<endl;
 	        odds=atoi(val.c_str());
 		if(odds!=0 && odds!=1) die("OR must be 0 or 1!");
+	    }
+    	    else if(id=="ORCONFIDENCE" || "ODDSCONF" )
+	    {
+	        cout<<id<<" "<<val<<endl;
+	        oddsconf=atoi(val.c_str());
+		if(oddsconf!=0 && oddsconf!=1) die("ORCONFIDENCE must be 0 or 1!");
 	    }
     	    else if(id=="PTHRESHOLD")
 	    {
@@ -607,10 +614,10 @@ permute affection status
   
     if(singlemarker)
     {
-	calc_singlemarker(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window,  nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, odds);
+	calc_singlemarker(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window,  nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, odds, oddsconf);
     }
-    else if(allbins) vb_ft_allbins(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window, nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, odds);
-    else vb_ft(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window, nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, verbose, odds);
+    else if(allbins) vb_ft_allbins(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window, nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, odds, oddsconf);
+    else vb_ft(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window, nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, verbose, odds, oddsconf);
 
     for(int l=0; l<nwindows; l++)
     {
