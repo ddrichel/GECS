@@ -1,6 +1,6 @@
 
 # Genomic Exhaustive Collapsing Scan (GECS)
- ###### _An exhaustive genomic scan for association in genomic data_
+ ###### _An exhaustive genomic scan for association_
 
 George Kanoungi, Michael Nothnagel, Tim Becker, Dmitriy Drichel. "The exhaustive genomic scan approach, with an application to rare-variant association analysis"
 https://www.biorxiv.org/content/10.1101/571752v1
