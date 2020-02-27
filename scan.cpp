@@ -14,8 +14,8 @@
 
 using namespace std;
 
-int DEBUG=1; // used for experimental and debugging purposes, e.g. testing of the VT feature
-
+int DEBUG=0; // used for experimental and debugging purposes, e.g. testing of the VT feature
+if(DEBUG==1) cout<<"DEBUG is set to 1. Is this intentional?"
 
 // Begin: some assistant functions
 int compareint (const void * a, const void * b)

@@ -14,6 +14,7 @@ https://www.biorxiv.org/content/10.1101/571752v1
   * [Single-marker analysis](#SMA)
   * [Exhaustive scan](#ES)
   * [Correction for multple testing](#CMT)
+  * [Variable Threshold (VT) analysis](#VT)
 * [Attributions](#Attributions)
   * [Authors](#Authors)
   * [License](#License)
@@ -116,6 +117,11 @@ The correction for multiple testing is achieved by performing permutation.
 the final corrected alpha will be reported in the \[\*_gecs_nct_\<nct\>.log\] file, along with additional information.
 
 
+#### Variable Threshold (VT) analysis
+
+The keyword "VT" in a parameter file will activate the Variable-threshold analysis if set to 1. The algorithm is described in the supplemental information of the manuscrupt, section d).
+The VT method iterates though the different NCT thresholds in addition to the genomic positions. The implementation should be considered experimental and used with caution, as the computational requirements can be very large and we conducted only a limited amount of testing.
+To reproduce the testing script, recompile the application with DEBUG=1 in the scan.cpp file and execute the script DATA/VB_test.sh out of the GECS parent directory.
 
 
 ### Attributions
