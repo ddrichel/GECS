@@ -3,6 +3,6 @@ SINGLEMARKER 0 	     // perform single marker analysis instead of VB
 PERMUTATIONS 0       // number of permutations
 OR 1
 #MAFT 0.01
-NCT 100
+NCT 50
 VT 1
 OUTPUTNAME ./DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPS	     // output without extension

@@ -96,7 +96,6 @@ int main(int argc, char *argv[]) {
     }
     #
     cout<<"-- GECS: genomic exhaustive collapsing scan --\n"<<endl;
-    cout<<"Scan started: "<<asctime(time(0))<<endl;
     // read paramters
     ifstream paramfile;
     paramfile.open(argv[1], ios::in);  

@@ -8,7 +8,7 @@ set -e
   
 # 100x FT
 filelist=""
-for i in {1..100}
+for i in {1..50}
 do
     cat DATA/example_template.param | sed s:XXX:${i}:g > DATA/example_template_NCT${i}.param
     ./gecs DATA/example_template_NCT${i}.param

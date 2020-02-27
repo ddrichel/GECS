@@ -15,7 +15,6 @@
 using namespace std;
 
 int DEBUG=0; // used for experimental and debugging purposes, e.g. testing of the VT feature
-if(DEBUG==1) cout<<"DEBUG is set to 1. Is this intentional?"
 
 // Begin: some assistant functions
 int compareint (const void * a, const void * b)
@@ -407,6 +406,8 @@ void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nword
 
 void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols, struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, int verbose, bool odds, bool oddsconf)
 {
+  if(DEBUG==1) cout<<"DEBUG is set to 1. Is this intentional?"<<endl;
+
     long unsigned int nbinsdistinct=0;
     long unsigned int nbinsnaive=0;
     int maxindiv=nlinestfam;
@@ -687,6 +688,7 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 
 void vb_vt(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols, struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, int *Ind)
     {
+      if(DEBUG==1) cout<<"DEBUG is set to 1. Is this intentional?"<<endl;
 
       int nindiv=ncases+ncontrols;
       fstream rareVB;
