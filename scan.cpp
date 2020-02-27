@@ -14,6 +14,8 @@
 
 using namespace std;
 
+int DEBUG=1; // used for experimental and debugging purposes, e.g. testing of the VT feature
+
 
 // Begin: some assistant functions
 int compareint (const void * a, const void * b)
@@ -374,6 +376,7 @@ void vb_ft_allbins(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nword
 		    if(pvalue<=pthresh) 
 		    {
 	    		rareVB<<map[window[l].index[n1]].chr<<"\t"<<map[window[l].index[n1]].pos<<"\t"<<map[window[l].index[n2]].pos<<"\t"<<n1+1<<"\t"<<n2+1<<"\t"<<Ind1[0]<<"\t"<<pvalue;
+
 	    		if (odds) rareVB<<"\t"<<OR_COLL;
 			if(odds && oddsconf){
 			  if(OR_COLL!=-9999 && sX!=0 && ncases-sX!=0 && sY!=0 && ncontrols-sY!=0){
@@ -571,6 +574,15 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 		      }
 		    }
                 }
+		if(DEBUG==1){
+		  rareVB<<"\t";
+		  for (uint32_t p=0; p<nwords; p++) 
+		    {
+		      rareVB<<dummy[p];
+		      if(p!=nwords-1) rareVB<< " ";
+		    }
+		}
+
 		rareVB<<"\n";
 		}
 
@@ -672,3 +684,292 @@ void vb_ft(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
     cout<<"\ndone!"<<endl;
 
 }
+
+void vb_vt(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int ncases, int ncontrols, struct WINDOW *window, int nwindows, int nlinestfam, int nlinestped, double pthresh, int optimalrare, int NCT, uint64_t ***BinCarriers, int nsim, string outputname, int minindiv, int *Ind)
+    {
+
+      int nindiv=ncases+ncontrols;
+      fstream rareVB;
+      string rarefileVB=outputname+"VBVT.txt";
+      rareVB.open(rarefileVB.c_str(), ios::out);
+      rareVB << "#INFO:";
+      rareVB<<"NSIM="<<nsim<<";";
+      rareVB << "NCT="<<NCT<<";";
+      rareVB << "VT="<<optimalrare<<";";
+      rareVB << "PTHRESHOLD="<<pthresh<<";";
+
+      rareVB<<"\n";
+      rareVB<<"chr\tstart_bp\tend_bp\tstart_var_nr\tend_var_nr\tcarriers\tp";
+      rareVB<<"\n";
+
+
+      double *pvaluesMC=new double[nsim]();
+      fill_n(pvaluesMC,nsim,1);
+      double *statsMC=new double[nsim]();
+      fill_n(statsMC,nsim,0);
+
+
+      for(int l=0; l<nwindows; l++) {
+	for(int n1=0; n1<window[l].n; n1++) { // startpos: go thourgh all variants that are present at highest level
+	  //cout<<l<<" "<<n1<<" "<<window[l].Ind[n1]<<endl;
+	  int startlevel=window[l].level_at_NCT[window[l].Ind[n1]-1];
+	  //	  cout<<l<<"  "<<window[l].level_at_NCT[window[l].Ind[n1]-1]<<" " <<window[l].n_level<<endl;
+	  int levels_at_startpos=window[l].n_level-startlevel; 
+
+	  int differentbin=0;
+	  if(n1<window[l].n-1){
+	    for (uint32_t p=0; p<nwords; p++) {	      
+	      if(BinCarriers[l][n1][p]!=BinCarriers[l][n1+1][p]){
+		differentbin=1;
+		break;
+		}
+	    }
+	  }
+	  if(n1==window[l].n-1) differentbin=1;
+
+	  if(differentbin==0) continue; // if adjacent non distinct bins
+
+	  int* Ind1 = new int[levels_at_startpos](); // keep track of number of individuals per level
+	  if(!Ind1) die("Memory allocation error in Ind1!");
+	  int* Ind2 = new int[levels_at_startpos](); // number of individuals per level without the first variant
+	  if(!Ind2) die("Memory allocation error in Ind2!");
+	  uint64_t** dummy1 = new uint64_t*[levels_at_startpos]();
+	  if(!dummy1) die("Memory allocation error in dummy1!");
+	  uint64_t** dummy2 = new uint64_t*[levels_at_startpos]();
+	  if(!dummy2) die("Memory allocation error in dummy1!");
+	  uint64_t** dummy = new uint64_t*[levels_at_startpos]();
+	  if(!dummy) die("Memory allocation error in dummy1!");
+
+	  for(int m=0; m<levels_at_startpos; m++) {
+	    dummy1[m]=new uint64_t[nwords]();
+	    if(!dummy1) die("Memory allocation error in dummy1!");
+	    dummy2[m]=new uint64_t[nwords]();
+	    if(!dummy2) die("Memory allocation error in dummy2!");
+	    dummy[m]=new uint64_t[nwords]();
+	    if(!dummy) die("Memory allocation error in dummy2!");
+	  }
+
+	  Ind1[0]=Ind[n1]; // lowest level=0, startlevel rescaled
+
+	  for (uint32_t p=0; p<nwords; p++) {
+	    dummy1[0][p]=BinCarriers[l][n1][p]; // all but last variant
+	    dummy2[0][p]=0; // all but first variant
+	    dummy[0][p]=dummy1[0][p]; // all variants
+	    Ind1[0]+=__builtin_popcountll(dummy[0][p]);
+	  }	  
+	  int* validlevel=new int[levels_at_startpos](); // vector indicating whether the level needs to be analyzed. encoding: 0=never seen; 1=active; -9: invalid for this level and above
+	  validlevel[0]=1; // level at startposition is always active, until no level is active
+	  int skipstartpos=1;
+	  for(int n2=n1; n2<window[l].n; n2++) { // variation of end position
+	    int skipendpos=1;
+	    int currentlevel=window[l].level_at_NCT[window[l].Ind[n2]-1];
+	    int lastvalidlevel=0; // if the level has not been encounted before, we need to compute this bin from the bin at a lower level, with position=n2-1xs
+	    if(currentlevel<=startlevel) {
+	      currentlevel=startlevel; // level has to be at least the level of startposition
+	    }
+	    // go from currentlevel to maxlevel
+	    //cout<<n1<<" "<<n2<<" "<<startlevel<<" "<<currentlevel<<" "<<validlevel[currentlevel]<<" 0"<<endl;
+	    for(int m=currentlevel-startlevel; m<levels_at_startpos; m++) {		  
+	      int skiplevels=1;
+	      if(validlevel[m]==1 || (m==currentlevel-startlevel && validlevel[m]!=-9)) {
+		if(n1!=n2) {
+		  Ind2[m]=0; 
+		  differentbin=0; // if new variants are contributed by last SNP in bin, set to 1
+		  if(m==currentlevel-startlevel){ // lowest level for this variant
+		    if(currentlevel>startlevel){ // if higher than startpos, find lastvalidlevel
+		      for(int h=currentlevel-startlevel; h>=0; h--){
+			if(validlevel[h]==1){
+			  lastvalidlevel=h;
+			  break;
+			}
+		      }
+		    }
+		    for (uint32_t p=0; p<nwords; p++) {
+		      dummy[m][p]=dummy[lastvalidlevel][p] | BinCarriers[l][n2][p]; // all variants
+		      dummy2[m][p]=dummy2[lastvalidlevel][p] | BinCarriers[l][n2][p]; // all but first variant
+		      Ind2[m]+=__builtin_popcountll(dummy[m][p]);
+		      if(differentbin==0 && dummy[m][p]!=dummy1[lastvalidlevel][p]) {
+			differentbin=1;
+			validlevel[m]=1;
+		      }
+		      if(differentbin==1) {
+			dummy1[m][p]=dummy[m][p]; // dummy1 becomes dummy for next iteration
+		      }
+		      if((skiplevels==1 || skipstartpos==1) && dummy[m][p]!=dummy2[m][p]) {
+			skiplevels=0;
+		      }
+		    }
+		  } // next bin is computed
+		  else{ // next bins are at higher levels
+		    for (uint32_t p=0; p<nwords; p++) {
+		      dummy[m][p] |= BinCarriers[l][n2][p]; // all variants
+		      dummy2[m][p] |= BinCarriers[l][n2][p]; // all but first variant
+		      Ind2[m]+=__builtin_popcountll(dummy[m][p]);
+		      if(differentbin==0 && dummy[m][p]!=dummy1[m][p]) { // check if current end position is redundant
+			differentbin=1;
+			validlevel[m]=1;
+		      }
+		      if(differentbin==1) {
+			dummy1[m][p]=dummy[m][p]; // dummy1 becomes dummy for next iteration
+		      }
+		      if((skiplevels==1 || skipstartpos==1) && dummy[m][p]!=dummy2[m][p]) {
+			skiplevels=0;
+		      }
+		    }
+		  }
+		  if(skiplevels==1 || Ind2[m]>=(nindiv-minindiv)) {
+		    if(m==0) {
+		      skipstartpos=1;
+		    } else if(m>0) {
+		      for(int h=m; h<levels_at_startpos; h++) {
+			validlevel[h]=-9;
+		      }
+		    }
+		    break;
+		  } else if(differentbin==0 || nindiv<minindiv) {
+		    continue;
+		  }
+		} else if(n1==n2) {
+		  skipstartpos=0; skiplevels=0;
+		}
+		if(differentbin==1) lastvalidlevel=m;		
+		if(differentbin==0 || skiplevels==1) break;
+		for(int n=0; n<nsim+1; n++) {
+		  int sY=0;
+		  int sX=0;
+		  double stat;
+		  //	    double OR_COLL;
+		  double pvalue;
+		  for (uint32_t p=0; p<nwords; p++) {
+		    sY += __builtin_popcountll(dummy[m][p] & BinSNPsCCFlagsMC[n][p][1]);
+		    sX += __builtin_popcountll(dummy[m][p] & BinSNPsCCFlagsMC[n][p][2]);
+		  }
+		  //	  cout<<ncases<<" "<<ncontrols<<" "<<sX<<" "<<sY<<endl;
+		  if((ncases+ncontrols-sX-sY)!=0) {
+		    stat=((double)ncases + (double)ncontrols)*((double)sX*(double)ncontrols - (double)sY*(double)ncases)*((double)sX*(double)ncontrols-(double)sY*(double)ncases)/((double)ncases*(double)ncontrols*((double)sX+(double)sY)*((double)ncases+(double)ncontrols-(double)sX-(double)sY));
+		  } else {
+		    stat=0;
+		  }
+
+		  if(n==0 ) {
+		    pvalue=alglib::chisquarecdistribution(1.0, stat);
+		    if(pvalue<=pthresh){
+		      if(n1!=n2) {
+			Ind1[m]=Ind2[m];
+		      }
+		      //				cout<<map[window[l].levelpos[window[l].n_level-1][n1]].chr<<"\t"<<map[window[l].levelpos[window[l].n_level-1][n1]].pos<<"\t"<<map[window[l].levelpos[window[l].n_level-1][n2]].pos<<"\t"<<n1+1<<"\t"<<n2+1<<"\t"<<Ind1[m]<<"\t"<<pvalue<<endl;
+		      rareVB<<map[window[l].index[n1]].chr<<"\t"<<map[window[l].index[n1]].pos<<"\t"<<map[window[l].index[n2]].pos<<"\t"<<n1+1<<"\t"<<n2+1<<"\t"<<Ind1[m]<<"\t"<<pvalue;
+
+		      if(DEBUG==1){
+			rareVB<<"\t";
+			for (uint32_t p=0; p<nwords; p++) 
+			  {
+			    rareVB<<" "<<dummy[m][p];
+			    if(p!=nwords-1) rareVB<< " ";
+			  }
+		      }
+		      rareVB<<endl;
+		    }
+		  } else if(n>0){
+		    if(stat>statsMC[n-1]){
+		      statsMC[n-1]=stat;
+		    }
+		    // if(pvalue<pvaluesMC[n-1]) {
+		    //   pvaluesMC[n-1]=pvalue;
+		    // }
+		  }
+		} // MC-simulations
+	      } // validlevel check
+	      //	  cout<<validlevel[m]<<endl;
+	      else if(validlevel[m]==-9) break; // -9 indicates that all higher levels are non-distinct
+	      if(!differentbin) break;
+
+	      if(n1==n2) break; // special case: at bin=variant at startpos, do not go through higher levels - they are all non-distinct
+	    } // levels
+	    //	    if(skipstartpos!=0)cout<<skipstartpos<<endl;
+	    if(skipstartpos==1) break;
+	    //	if(skiprow==1) break;
+	  } // endpos
+	  delete[] validlevel;
+	  //	  cout<<n1<<" "<<levels_at_startpos<<endl;
+	  for(int m=0; m<levels_at_startpos; m++) {
+	    delete[] dummy1[m];
+	    delete[] dummy2[m];
+	    delete[] dummy[m];
+	  }
+	  delete[] dummy1;
+	  delete[] dummy2;
+	  delete[] dummy;
+	  delete[] Ind1;
+	  delete[] Ind2;
+	} // startpos
+      } // chromosomes
+      rareVB.close();
+
+      for(int s=0; s<nsim; s++){
+	pvaluesMC[s]=alglib::chisquarecdistribution(1.0, statsMC[s]);
+      }
+
+      if(nsim>0) {
+
+	sort(pvaluesMC, pvaluesMC + nsim);
+
+	fstream pvalsMC;
+	string pvalsMCfile=outputname+".pvals";
+	pvalsMC.open(pvalsMCfile.c_str(), ios::out);
+	if(!pvalsMC) {
+	  die("pvalsMC can not be opened!");
+	}
+	for(int n=0; n<nsim; n++) {
+	  pvalsMC<<pvaluesMC[n]<<endl;
+	}
+	pvalsMC.close();
+
+	ifstream rareVBin;
+	rareVBin.open(rarefileVB.c_str(), ios::in);
+	if(!rareVBin) {
+	  die("rareVBin can not be opened!");
+	}
+
+	string rarefileVBout=outputname+"corrVB.txt";
+	fstream rareVBout;
+	rareVBout.open(rarefileVBout.c_str(), ios::out);
+	if(!rareVBout) {
+	  die("rareVBout can not be opened!");
+	}
+
+	string line;
+	int chr,posbp1,posbp2,pos1,pos2,carr;
+	double pvaluein;
+	getline(rareVBin,line);
+	rareVBout<<line<<endl;
+	getline(rareVBin,line);
+	rareVBout<<line<<"\tp_corr"<<endl;
+
+	while(true) {
+	  rareVBin>>chr>>posbp1>>posbp2>>pos1>>pos2>>carr>>pvaluein;
+	  if(rareVBin.eof()) {
+	    break;
+	  }
+	  int pcounter=0;
+	  double pvaluecorr;
+	  for(int n=0; n<nsim; n++) {
+	    if(pvaluesMC[n]<pvaluein) {
+	      pcounter++;
+	    } else {
+	      break;
+	    }
+	  }
+	  pvaluecorr=(double)(pcounter+1)/(double)(nsim+1);
+	  rareVBout<<chr<<"\t"<<posbp1<<"\t"<<posbp2<<"\t"<<pos1<<"\t"<<pos2<<"\t"<<carr<<"\t"<<pvaluein<<"\t"<<pvaluecorr<<endl;
+	}
+	rareVBin.close();
+	rareVBout.close();
+
+      }
+
+      delete[] pvaluesMC;
+
+      cout<<"\ndone!"<<endl;
+
+    }

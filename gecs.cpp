@@ -143,6 +143,13 @@ int main(int argc, char *argv[]) {
 		NCT=atoi(val.c_str());
 	        if(NCT==0) die("NCT must be > 0!");
     	    }
+    	    else if(id=="VT")
+	    {
+	        cout<<id<<" "<<val<<endl;
+		int tmpvt=atoi(val.c_str());
+		if(tmpvt!=0 && tmpvt!=1) die("VT must be 0 or 1!");
+		else if(tmpvt==1) optimalrare=true;
+    	    }
     	    else if(id=="MAFT")
 	    {
 	        cout<<id<<" "<<val<<endl;
@@ -257,7 +264,7 @@ int main(int argc, char *argv[]) {
     
     time_t now1 = time(0);
     tm* locstarttime = localtime(&now1);
-    strm<<"Scan start time:"<<asctime(locstarttime)<<endl;
+    strm<<"Scan start time: "<<asctime(locstarttime)<<endl;
     logg(strm.str());
     strm.str(string());
 
@@ -580,8 +587,53 @@ read bed file
 permute affection status
 
 */
-    for(int l=0; l<nwindows; l++) window[l].n_level=1;
+    int **levelcounter=NULL;
 
+    if(!optimalrare) for(int l=0; l<nwindows; l++) window[l].n_level=1;
+      // for VT: count occupied levels
+    else if(optimalrare){
+      levelcounter=new int*[nwindows];
+      for(int l=0; l<nwindows; l++){
+	levelcounter[l]=new int[NCT+1]();
+      }
+    }
+
+    // count n_at_level
+
+    // for VT: determine n_level
+    if(optimalrare){
+      for(int l=0; l<nwindows; l++){
+	for(int m=0; m<window[l].n; m++){
+	  levelcounter[l][window[l].Ind[m]]++;
+	}
+      }
+      for(int l=0; l<nwindows; l++){
+	int tmplevelcount=0;
+	for(int m=1; m<=NCT; m++){
+	  if(levelcounter[l][m]!=0){
+	    tmplevelcount++;
+	    //  cout<<l<<" "<<m<<" "<<levelcounter[l][m]<<" "<<tmplevelcount<<endl;
+
+	  }
+	}
+	window[l].n_level=tmplevelcount;
+	window[l].NCT_at_level=new int[tmplevelcount];
+	window[l].level_at_NCT=new int[NCT];
+	fill_n(window[l].level_at_NCT,NCT,-9);
+	int tmplevelcount2=0;
+	for(int m=0; m<NCT; m++){
+	  if(levelcounter[l][m+1]!=0){
+	    window[l].level_at_NCT[m]=tmplevelcount2;
+	    window[l].NCT_at_level[tmplevelcount2]=m+1;
+	    tmplevelcount2++;
+	  }
+	}
+      }
+      for(int l=0; l<nwindows; l++){
+	delete[] levelcounter[l];
+      }
+      delete[] levelcounter;
+    }
 
     for (int n = 1; n <= nsim; n++) 
     {
@@ -617,7 +669,8 @@ permute affection status
 	calc_singlemarker(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window,  nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, odds, oddsconf);
     }
     else if(allbins) vb_ft_allbins(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window, nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, odds, oddsconf);
-    else vb_ft(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window, nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, verbose, odds, oddsconf);
+    else if(!optimalrare) vb_ft(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window, nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, verbose, odds, oddsconf);
+    else if (optimalrare) vb_vt(map, BinSNPsCCFlagsMC, nwordsSNPs, ncases, ncontrols, window, nwindows, nlinestfam, nlinestped, pthresh, optimalrare, NCT, BinCarriers, nsim, outputname, minindiv, Ind);
 
     for(int l=0; l<nwindows; l++)
     {
@@ -649,7 +702,7 @@ permute affection status
     
     time_t now2 = time(0);
     tm* locendtime = localtime(&now2);
-    strm<<"\n\n"<<"Scan end time:"<<asctime(locendtime)<<endl;
+    strm<<"\n\n"<<"Scan end time: "<<asctime(locendtime)<<endl;
     logg(strm.str());
     strm.str(string());
     

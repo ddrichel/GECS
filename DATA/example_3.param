@@ -1,6 +1,6 @@
 BFILE ./DATA/example	// plink binary file without extension
 SINGLEMARKER 0 	     // perform VB instead of SMA 
 PERMUTATIONS 99       // number of permutations
-NCT 25			// Automatically MAFT will be calculated, NCT appeares in name of output files
+NCT 25			// MAFT will be calculated and NCT will appear in name of output files
 OR 1
 OUTPUTNAME ./DATA/example	     // output without extension
