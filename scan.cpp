@@ -866,7 +866,7 @@ void vb_vt(struct MAP *map, uint64_t*** BinSNPsCCFlagsMC, uint32_t nwords, int n
 			rareVB<<"\t";
 			for (uint32_t p=0; p<nwords; p++) 
 			  {
-			    rareVB<<" "<<dummy[m][p];
+			    rareVB<<dummy[m][p];
 			    if(p!=nwords-1) rareVB<< " ";
 			  }
 		      }

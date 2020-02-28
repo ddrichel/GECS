@@ -17,15 +17,16 @@ do
     rm DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPS_gecs_${i}.txt
     filelist=${filelist}" DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPS_gecs_"${i}"_indlist_uniq.txt"
 done
-cat $filelist > DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBFT_indlist.txt && rm  $filelist
+cat $filelist > DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBFT_indlist.txt
+rm  $filelist
 
-cat DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBFT_indlist.txt  | sort | uniq > DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBFT_indlist_uniq.txt
+cat DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBFT_indlist.txt  | sort -T DATA/ | uniq > DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBFT_indlist_uniq.txt
 rm DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBFT_indlist.txt
 
 
 # 1x VB
 ./gecs DATA/example_6.param
-sed '1d;2d;' DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBVT.txt | cut -f8 | sort | uniq > DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBVT_indlist_uniq.txt
+sed '1d;2d;' DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBVT.txt | cut -f8 | sort -T DATA/ | uniq > DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBVT_indlist_uniq.txt
 rm DATA/1k_sim1_CEU_POLYSNPS_chr22_10k_SNPSVBVT.txt
 
 
